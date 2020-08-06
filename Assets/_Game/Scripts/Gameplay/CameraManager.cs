@@ -1,0 +1,20 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraManager : MonoBehaviour
+{
+    [SerializeField]
+    private Transform target;
+
+    [SerializeField]
+    private float moveSpeed = 10;
+
+    [SerializeField]
+    private Vector3 offset;
+
+    private void LateUpdate()
+    {
+        transform.position = Vector3.Lerp(transform.position, new Vector3(target.position.x + offset.x, target.position.y + offset.y, target.position.z + offset.z), moveSpeed);
+    }
+}
