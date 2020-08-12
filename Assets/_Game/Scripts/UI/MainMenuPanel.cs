@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MainMenuPanel : MonoBehaviour
+public class MainMenuPanel : Panel
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Play()
     {
-        
+        SceneManager.LoadScene("Game");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Quit()
     {
-        
+        Application.Quit();
+    }
+
+    public void CustomLevels()
+    {
+        AssetBundleLoader.Instance.LoadBundles();
     }
 }
