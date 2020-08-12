@@ -52,5 +52,10 @@ public class DeathController : MonoBehaviour
         movementController.LegPivot2.position = leg2StartPosition;
         movementController.LegPivot2.rotation = leg2StartRotation;
         movementController.LegPivot2.transform.localScale = Vector3.one;
+
+        movementController.LegPivot1.transform.rotation = Quaternion.Euler(0, 0, -movementController.RespawnRotation);
+        movementController.LegPivot2.transform.rotation = Quaternion.Euler(0, 0, movementController.RespawnRotation);
+
+        InterfaceHandler.OnReset();
     }
 }

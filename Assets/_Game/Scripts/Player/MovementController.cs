@@ -19,46 +19,43 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     private float maxScale = 1.2f;
 
+    public float RespawnRotation = 10;
+
+    [Space()]
     [SerializeField]
-    private float startingRotation = 10;
+    private float startingLeg1Force;
+
+    [SerializeField]
+    private float startingLeg2Force;
+
+    private Rigidbody body;
 
     private void Awake()
     {
-        LegPivot1.transform.rotation = Quaternion.Euler(0, 0, -startingRotation);
-        LegPivot2.transform.rotation = Quaternion.Euler(0, 0, startingRotation);
+        LegPivot1.AddTorque(new Vector3(0, 0, startingLeg1Force), ForceMode.Impulse);
+        LegPivot2.AddTorque(new Vector3(0, 0, startingLeg2Force), ForceMode.Impulse);
+
+        body = GetComponent<Rigidbody>();
+
+        Cursor.visible = false;
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.D))
-            LegPivot1.AddTorque(new Vector3(0, 0, -rotationSpeed * Time.deltaTime), ForceMode.Impulse);
-        if (Input.GetKey(KeyCode.A))
-            LegPivot1.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    Vector3 target = new Vector3(1, minScale, 1);
-        //    LegPivot1.transform.localScale = Vector3.Lerp(LegPivot1.transform.localScale, target, scaleSpeed * Time.deltaTime);
-        //}
-        //if (Input.GetKey(KeyCode.S))
-        //{
-        //    Vector3 target = new Vector3(1, maxScale, 1);
-        //    LegPivot1.transform.localScale = Vector3.Lerp(LegPivot1.transform.localScale, target, scaleSpeed * Time.deltaTime);
-        //}
+        if (Input.GetAxisRaw("Leg1") != 0)
+        {
+            if (Input.GetAxisRaw("Leg1") > 0)
+                LegPivot1.AddTorque(new Vector3(0, 0, -rotationSpeed * Time.deltaTime), ForceMode.Impulse);
+            if (Input.GetAxisRaw("Leg1") < 0)
+                LegPivot1.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
+        }
 
-        if (Input.GetKey(KeyCode.RightArrow))
-            LegPivot2.AddTorque(new Vector3(0, 0, -rotationSpeed * Time.deltaTime), ForceMode.Impulse);
-        if (Input.GetKey(KeyCode.LeftArrow))
-            LegPivot2.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
-
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    Vector3 target = new Vector3(1, minScale, 1);
-        //    LegPivot2.transform.localScale = Vector3.Lerp(LegPivot2.transform.localScale, target, scaleSpeed * Time.deltaTime);
-        //}
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    Vector3 target = new Vector3(1, maxScale, 1);
-        //    LegPivot2.transform.localScale = Vector3.Lerp(LegPivot2.transform.localScale, target, scaleSpeed * Time.deltaTime);
-        //}
+        if (Input.GetAxisRaw("Leg2") != 0)
+        {
+            if (Input.GetAxisRaw("Leg2") > 0)
+                LegPivot2.AddTorque(new Vector3(0, 0, -rotationSpeed * Time.deltaTime), ForceMode.Impulse);
+            if (Input.GetAxisRaw("Leg2") < 0)
+                LegPivot2.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
+        }
     }
 }
