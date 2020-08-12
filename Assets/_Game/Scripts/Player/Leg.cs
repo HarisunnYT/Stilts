@@ -34,15 +34,23 @@ public class Leg : MonoBehaviour
         {
             AudioData audioData = audioList.GetAudioData(collision.transform.tag);
             if (audioData != null)
-            {
-                audioSource.volume = collision.relativeVelocity.magnitude / soundDamper;
-                audioSource.pitch = 1 + Random.Range(-pitchOffset, pitchOffset);
-
-                audioSource.clip = audioData.GetRandomClip();
-                audioSource.Play();
-
-                audioTimer = Time.time + audioDelay;
-            }
+                PlaySound(audioData.GetRandomClip(), collision);
         }
+    }
+
+    public void PlaySound(AudioClip sound, float volume)
+    {
+        audioSource.volume = volume;
+        audioSource.pitch = 1 + Random.Range(-pitchOffset, pitchOffset);
+
+        audioSource.clip = sound;
+        audioSource.Play();
+
+        audioTimer = Time.time + audioDelay;
+    }
+
+    public void PlaySound(AudioClip sound, Collision collision)
+    {
+        PlaySound(sound, collision.relativeVelocity.magnitude / soundDamper);
     }
 }

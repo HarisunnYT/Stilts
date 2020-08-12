@@ -15,10 +15,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void ActiveSceneChanged(Scene from, Scene to)
     {
+        Time.timeScale = 1;
         if (to.name != "MainMenu")
-        {
-            Time.timeScale = 1;
             Instantiate(gameCanvasPrefab);
-        }
     }
 }
