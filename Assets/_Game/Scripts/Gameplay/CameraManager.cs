@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : Singleton<CameraManager>
 {
     [SerializeField]
     private Transform target;
@@ -13,15 +13,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField]
     private Vector3 offset;
 
-    [SerializeField]
-    private float followDelay = 2;
-
     private bool following = false;
-
-    private void Awake()
-    {
-        Invoke("StartFollowing", followDelay);
-    }
 
     private void StartFollowing()
     {
@@ -30,7 +22,7 @@ public class CameraManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (following)
+        if (following || FTU.Instance == null)
             transform.position = Vector3.Lerp(transform.position, new Vector3(target.position.x + offset.x, target.position.y + offset.y, target.position.z + offset.z), moveSpeed);
     }
 }

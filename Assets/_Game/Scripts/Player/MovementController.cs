@@ -7,36 +7,10 @@ public class MovementController : MonoBehaviour
     public Rigidbody LegPivot1;
     public Rigidbody LegPivot2;
 
-    [SerializeField]
-    private float rotationSpeed = 10;
-
-    [SerializeField]
-    private float scaleSpeed = 2f;
-
-    [SerializeField]
-    private float minScale = 0.5f;
-
-    [SerializeField]
-    private float maxScale = 1.2f;
-
-    public float RespawnRotation = 10;
-
-    [Space()]
-    [SerializeField]
-    private float startingLeg1Force;
-
-    [SerializeField]
-    private float startingLeg2Force;
-
-    private Rigidbody body;
+    private float rotationSpeed = 75;
 
     private void Awake()
     {
-        LegPivot1.AddTorque(new Vector3(0, 0, startingLeg1Force), ForceMode.Impulse);
-        LegPivot2.AddTorque(new Vector3(0, 0, startingLeg2Force), ForceMode.Impulse);
-
-        body = GetComponent<Rigidbody>();
-
         Cursor.visible = false;
     }
 
