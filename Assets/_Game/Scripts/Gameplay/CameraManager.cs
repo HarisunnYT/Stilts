@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : Singleton<CameraManager>
+public class CameraManager : MonoBehaviour
 {
     [SerializeField]
     private Transform target;
@@ -15,7 +15,7 @@ public class CameraManager : Singleton<CameraManager>
 
     private bool following = false;
 
-    private void StartFollowing()
+    public void StartFollowing()
     {
         following = true;
     }

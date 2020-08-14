@@ -8,10 +8,12 @@ public class LevelCell : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text levelNameText;
+    public string LevelName { get; private set; }
 
     public void Configure(string sceneName)
     {
         levelNameText.text = sceneName;
+        LevelName = sceneName;
     }
 
     public void PlayLevel()

@@ -27,12 +27,6 @@ public class PanelManager : Singleton<PanelManager>
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Pause") && !GetPanel<DifficultyPanel>().gameObject.activeSelf && !GetPanel<PausePanel>().gameObject.activeSelf)
-            ShowPanel<PausePanel>();
-    }
-
     public void ShowPanel<T>() where T : Panel
     {
         GetPanel<T>().ShowPanel();

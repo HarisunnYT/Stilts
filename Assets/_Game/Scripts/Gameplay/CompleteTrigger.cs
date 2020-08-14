@@ -15,4 +15,10 @@ public class CompleteTrigger : MonoBehaviour
         if (other.tag == "Player")
             Complete();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Leg"))
+            Complete();
+    }
 }

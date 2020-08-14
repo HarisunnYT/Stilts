@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Steamworks;
+using Steamworks.Ugc;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -8,51 +10,74 @@ public class AssetBundleLoader : PersistentSingleton<AssetBundleLoader>
 {
     public List<string> LoadedScenes { get; private set; } = new List<string>();
 
-    private const string assetBundleName = "mod";
-
-    private bool bundlesLoaded = false;
+    private List<AssetBundle> loadedBundles = new List<AssetBundle>();
 
     public void LoadBundles()
     {
-        if (bundlesLoaded)
-            PanelManager.Instance.ShowPanel<CustomLevelsPanel>();
-        else
-            StartCoroutine(LoadBundlesIE());
+        QueryLevels();
     }
 
-    private IEnumerator LoadBundlesIE()
+    public void Refresh()
     {
+        LoadBundles();
+    }
+
+    private async void QueryLevels()
+    {
+        var query = Query.Items.WithTag("Level");
+        var task = await query.GetPageAsync(1);
+        StartCoroutine(LoadBundlesIE(task.Value.Entries));
+    }
+
+    private IEnumerator LoadBundlesIE(IEnumerable<Item> items)
+    {
+        foreach (var bundle in loadedBundles)
+            bundle.Unload(true);
+
+        loadedBundles.Clear();
+        LoadedScenes.Clear();
+
         PanelManager.Instance.ShowPanel<LoadingBundlesPanel>();
 
-        var directory = new DirectoryInfo(Application.streamingAssetsPath);
-        foreach(var file in directory.GetFiles())
+        foreach (var item in items)
         {
-            //it means it could be an asset bundle file
-            if (string.IsNullOrEmpty(file.Extension))
+            if (!string.IsNullOrEmpty(item.Directory))
             {
-                AssetBundleCreateRequest bundleLoadRequest = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, file.Name));
-                yield return bundleLoadRequest;
-
-                AssetBundle myLoadedAssetBundle = bundleLoadRequest.assetBundle;
-                if (myLoadedAssetBundle == null)
+                var directory = new DirectoryInfo(item.Directory);
+                if (directory.Exists)
                 {
-                    Debug.LogError("Failed to load asset bundle");
-                    yield break;
-                }
-
-                if (myLoadedAssetBundle.isStreamedSceneAssetBundle)
-                {
-                    string[] scenePaths = myLoadedAssetBundle.GetAllScenePaths();
-                    foreach (var scenePath in scenePaths)
+                    foreach (var file in directory.GetFiles())
                     {
-                        string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
-                        LoadedScenes.Add(sceneName);
+                        //it means it could be an asset bundle file
+                        if (string.IsNullOrEmpty(file.Extension))
+                        {
+                            AssetBundleCreateRequest bundleLoadRequest = AssetBundle.LoadFromFileAsync(Path.Combine(item.Directory, file.Name));
+                            yield return bundleLoadRequest;
+
+                            AssetBundle myLoadedAssetBundle = bundleLoadRequest.assetBundle;
+                            loadedBundles.Add(myLoadedAssetBundle);
+
+                            if (myLoadedAssetBundle == null)
+                            {
+                                Debug.LogError("Failed to load asset bundle");
+                                yield break;
+                            }
+
+                            if (myLoadedAssetBundle.isStreamedSceneAssetBundle)
+                            {
+                                string[] scenePaths = myLoadedAssetBundle.GetAllScenePaths();
+                                foreach (var scenePath in scenePaths)
+                                {
+                                    string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+                                    LoadedScenes.Add(sceneName);
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
 
-        bundlesLoaded = true;
         PanelManager.Instance.ShowPanel<CustomLevelsPanel>();
     }
 }

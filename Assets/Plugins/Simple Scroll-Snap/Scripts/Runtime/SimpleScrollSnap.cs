@@ -68,7 +68,7 @@ namespace DanielLochner.Assets.SimpleScrollSnap
 
         private RectTransform[] PanelsRT
         { get; set; }
-        public GameObject[] Panels { get; set; }
+        public List<GameObject> Panels { get; set; } = new List<GameObject>();
         public Toggle[] Toggles { get; set; }
 
         public int NumberOfPanels
@@ -236,11 +236,10 @@ namespace DanielLochner.Assets.SimpleScrollSnap
             // Panels
             size = (sizeControl == SizeControl.Manual) ? size : new Vector2(GetComponent<RectTransform>().rect.width, GetComponent<RectTransform>().rect.height);
 
-            Panels = new GameObject[NumberOfPanels];
             PanelsRT = new RectTransform[NumberOfPanels];
             for (int i = 0; i < NumberOfPanels; i++)
             {
-                Panels[i] = Content.GetChild(i).gameObject;
+                Panels.Add(Content.GetChild(i).gameObject);
                 PanelsRT[i] = Panels[i].GetComponent<RectTransform>();
 
                 if (movementType == MovementType.Fixed && automaticallyLayout)
@@ -352,12 +351,12 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         {
             int panelNumber = NearestPanel;
             float[] distances = new float[NumberOfPanels];
-            for (int i = 0; i < Panels.Length; i++)
+            for (int i = 0; i < Panels.Count; i++)
             {
                 distances[i] = DisplacementFromCenter(i).magnitude;
             }
             float minDistance = Mathf.Min(distances);
-            for (int i = 0; i < Panels.Length; i++)
+            for (int i = 0; i < Panels.Count; i++)
             {
                 if (minDistance == distances[i])
                 {
@@ -667,17 +666,17 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         {
             Add(panel, NumberOfPanels);
         }
-        public void Add(GameObject panel, int index)
+        public GameObject Add(GameObject panel, int index)
         {
             if (NumberOfPanels != 0 && (index < 0 || index > NumberOfPanels))
             {
                 Debug.LogError("<b>[SimpleScrollSnap]</b> Index must be an integer from 0 to " + NumberOfPanels + ".", gameObject);
-                return;
+                return null;
             }
             else if (!automaticallyLayout)
             {
                 Debug.LogError("<b>[SimpleScrollSnap]</b> \"Automatic Layout\" must be enabled for content to be dynamically added during runtime.");
-                return;
+                return null;
             }
 
             panel = Instantiate(panel, Content, false);
@@ -695,6 +694,8 @@ namespace DanielLochner.Assets.SimpleScrollSnap
                 }
                 Setup();
             }
+
+            return panel;
         }
 
         public void RemoveFromFront()
@@ -731,6 +732,7 @@ namespace DanielLochner.Assets.SimpleScrollSnap
             }
 
             DestroyImmediate(Panels[index]);
+            Panels.RemoveAt(index);
 
             if (Validate())
             {

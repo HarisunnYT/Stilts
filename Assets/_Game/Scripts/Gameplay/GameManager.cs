@@ -19,4 +19,10 @@ public class GameManager : PersistentSingleton<GameManager>
         if (to.name != "MainMenu")
             Instantiate(gameCanvasPrefab);
     }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Pause") && !PanelManager.Instance.GetPanel<DifficultyPanel>().gameObject.activeSelf && !PanelManager.Instance.GetPanel<PausePanel>().gameObject.activeSelf)
+            PanelManager.Instance.ShowPanel<PausePanel>();
+    }
 }

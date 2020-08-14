@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnPlayerTouched : MonoBehaviour, IResetable
+public class OnPlayerTouched : MonoBehaviour
 {
     [SerializeField]
     private UnityEvent OnTouched;
@@ -12,21 +12,6 @@ public class OnPlayerTouched : MonoBehaviour, IResetable
     private bool occurOnce = false;
 
     private bool triggered = false;
-
-    private void Awake()
-    {
-        Register();
-    }
-
-    public void OnReset()
-    {
-        triggered = false;
-    }
-
-    public void Register()
-    {
-        InterfaceHandler.Register(this);
-    }
 
     private void OnCollisionEnter(Collision collision)
     {

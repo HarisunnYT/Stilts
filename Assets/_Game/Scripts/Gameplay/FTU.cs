@@ -18,11 +18,23 @@ public class FTU : Singleton<FTU>
     [SerializeField]
     private float cameraFollowDelay = 2;
 
+    [Space()]
+    [SerializeField]
+    private CameraManager cameraManager;
+
     private void Start()
     {
         player.LegPivot1.AddTorque(new Vector3(0, 0, startingLeg1Force), ForceMode.Impulse);
         player.LegPivot2.AddTorque(new Vector3(0, 0, startingLeg2Force), ForceMode.Impulse);
 
-        CameraManager.Instance.Invoke("StartFollowing", cameraFollowDelay);
+        player.InputEnabled = false;
+
+        Invoke("StartFollowing", cameraFollowDelay);
+    }
+
+    private void StartFollowing()
+    {
+        cameraManager.StartFollowing();
+        player.InputEnabled = true;
     }
 }

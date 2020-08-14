@@ -9,4 +9,11 @@ public class SteamManager : PersistentSingleton<SteamManager>
     {
         SteamClient.Init(1394510);
     }
+
+    private void OnApplicationQuit()
+    {
+#if !UNITY_EDITOR
+        SteamClient.Shutdown();
+#endif
+    }
 }

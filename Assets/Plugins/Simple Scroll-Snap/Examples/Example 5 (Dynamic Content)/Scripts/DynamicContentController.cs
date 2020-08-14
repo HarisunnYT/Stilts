@@ -3,6 +3,7 @@
 // Author: Daniel Lochner
 
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         protected GameObject panel, toggle, addInput, removeInput;
 
         private float toggleWidth;
-        private SimpleScrollSnap sss;
+        public SimpleScrollSnap sss { get; private set; }
         #endregion
 
         #region Methods
@@ -29,9 +30,9 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         {
             return Add(0);
         }
-        public void AddToBack()
+        public GameObject AddToBack()
         {
-            Add(sss.NumberOfPanels);
+            return Add(sss.NumberOfPanels);
         }
         public void AddAtIndex()
         {
@@ -66,9 +67,8 @@ namespace DanielLochner.Assets.SimpleScrollSnap
                 Remove(0);
             }
         }
-        public void RemoveAtIndex()
+        public void RemoveAtIndex(int index)
         {
-            int index = Convert.ToInt32(removeInput.GetComponent<InputField>().text);
             Remove(index);
         }
         private void Remove(int index)
@@ -83,6 +83,7 @@ namespace DanielLochner.Assets.SimpleScrollSnap
                 sss.Remove(index);
             }
         }
+
         #endregion
     }
 }

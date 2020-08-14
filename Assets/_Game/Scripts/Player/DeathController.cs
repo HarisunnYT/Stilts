@@ -55,7 +55,5 @@ public class DeathController : MonoBehaviour
 
         //movementController.LegPivot1.transform.rotation = Quaternion.Euler(0, 0, -movementController.RespawnRotation);
         //movementController.LegPivot2.transform.rotation = Quaternion.Euler(0, 0, movementController.RespawnRotation);
-
-        InterfaceHandler.OnReset();
     }
 }

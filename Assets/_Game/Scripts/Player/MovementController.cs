@@ -9,6 +9,8 @@ public class MovementController : MonoBehaviour
 
     private float rotationSpeed = 75;
 
+    public bool InputEnabled { get; set; } = true;
+
     private void Awake()
     {
         Cursor.visible = false;
@@ -16,6 +18,9 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
+        if (!InputEnabled)
+            return;
+
         if (Input.GetAxisRaw("Leg1") != 0)
         {
             if (Input.GetAxisRaw("Leg1") > 0)
