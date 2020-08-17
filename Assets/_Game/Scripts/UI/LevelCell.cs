@@ -17,6 +17,9 @@ public class LevelCell : MonoBehaviour
     [SerializeField]
     private RawImage previewImage;
 
+    [SerializeField]
+    private GameObject continueObj;
+
     public string LevelName { get; private set; }
     private string ownerName;
 
@@ -28,6 +31,7 @@ public class LevelCell : MonoBehaviour
 
         LevelName = workshopItem.LevelName;
         ownerName = workshopItem.Item.Owner.Name;
+        continueObj.SetActive(SaveManager.Instance.HasSavedData(LevelName + "_" + ownerName));
     }
 
     private async void LoadPreviewImage(string url)
@@ -68,9 +72,16 @@ public class LevelCell : MonoBehaviour
         }
     }
 
-    public void PlayLevel()
+    public void Continue()
     {
         SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerName);
+        SceneManager.LoadScene(LevelName);
+    }
+
+    public void NewGame()
+    {
+        SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerName);
+        SaveManager.Instance.ClearSavedData(LevelName + "_" + ownerName);
         SceneManager.LoadScene(LevelName);
     }
 }
