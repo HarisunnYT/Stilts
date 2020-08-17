@@ -8,7 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class AssetBundleLoader : PersistentSingleton<AssetBundleLoader>
 {
-    public List<string> LoadedScenes { get; private set; } = new List<string>();
+    public struct WorkshopItem
+    {
+        public Item Item;
+        public string LevelName;
+    }
+
+    public List<WorkshopItem> LoadedWorkshopItems { get; private set; } = new List<WorkshopItem>();
 
     private List<AssetBundle> loadedBundles = new List<AssetBundle>();
 
@@ -35,7 +41,7 @@ public class AssetBundleLoader : PersistentSingleton<AssetBundleLoader>
             bundle.Unload(true);
 
         loadedBundles.Clear();
-        LoadedScenes.Clear();
+        LoadedWorkshopItems.Clear();
 
         PanelManager.Instance.ShowPanel<LoadingBundlesPanel>();
 
@@ -69,7 +75,7 @@ public class AssetBundleLoader : PersistentSingleton<AssetBundleLoader>
                                 foreach (var scenePath in scenePaths)
                                 {
                                     string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
-                                    LoadedScenes.Add(sceneName);
+                                    LoadedWorkshopItems.Add(new WorkshopItem() { Item = item, LevelName = sceneName });
                                 }
                             }
                         }

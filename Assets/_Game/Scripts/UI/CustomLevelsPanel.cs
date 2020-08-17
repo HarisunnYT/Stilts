@@ -19,25 +19,25 @@ public class CustomLevelsPanel : Panel
 
     protected override void OnShow()
     {
-        foreach (var sceneName in AssetBundleLoader.Instance.LoadedScenes)
+        foreach (var workshopItem in AssetBundleLoader.Instance.LoadedWorkshopItems)
         {
             bool exists = false;
             for (int i = 0; i < scroller.Panels.Count; i++)
             {
-                if (scroller.Panels[i].GetComponent<LevelCell>().LevelName == sceneName)
+                if (scroller.Panels[i].GetComponent<LevelCell>().LevelName == workshopItem.LevelName)
                     exists = true;
             }
 
             if (!exists)
-                CreateLevelCell(sceneName);
+                CreateLevelCell(workshopItem);
         }
 
         for (int i = 0; i < scroller.Panels.Count; i++)
         {
             bool needsDeleting = true;
-            foreach (var sceneName in AssetBundleLoader.Instance.LoadedScenes)
+            foreach (var workshopItem in AssetBundleLoader.Instance.LoadedWorkshopItems)
             {
-                if (scroller.Panels[i].GetComponent<LevelCell>().LevelName == sceneName)
+                if (scroller.Panels[i].GetComponent<LevelCell>().LevelName == workshopItem.LevelName)
                     needsDeleting = false;
             }
 
@@ -51,12 +51,12 @@ public class CustomLevelsPanel : Panel
         AssetBundleLoader.Instance.Refresh();
     }
 
-    private void CreateLevelCell(string sceneName)
+    private void CreateLevelCell(AssetBundleLoader.WorkshopItem workshopItem)
     {
         Instantiate(togglePrefab, scroller.pagination.transform.position + new Vector3(10 * (scroller.NumberOfPanels + 1), 0, 0), Quaternion.identity, scroller.pagination.transform);
         scroller.pagination.transform.position -= new Vector3(10 / 2f, 0, 0);
 
         GameObject obj = scroller.Add(levelCellPrefab, 0);
-        obj.GetComponent<LevelCell>().Configure(sceneName);
+        obj.GetComponent<LevelCell>().Configure(workshopItem);
     }
 }

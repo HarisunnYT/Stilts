@@ -9,7 +9,7 @@ public class CreateAssetBundles
     [MenuItem("Tools/Build Asset Bundles")]
     private static void BuildAssetBundles()
     {
-        BuildPipeline.BuildAssetBundles("Assets/AssetBundles", BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
+        BuildPipeline.BuildAssetBundles(Application.streamingAssetsPath + "/WorkshopItem", BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
     }
 }
 

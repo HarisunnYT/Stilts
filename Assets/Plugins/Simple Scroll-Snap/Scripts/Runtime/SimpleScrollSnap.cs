@@ -71,6 +71,8 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         public List<GameObject> Panels { get; set; } = new List<GameObject>();
         public Toggle[] Toggles { get; set; }
 
+        private bool hasSetUp = false;
+
         public int NumberOfPanels
         {
             get { return Content.childCount; }
@@ -220,6 +222,11 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         }
         private void Setup()
         {
+            if (hasSetUp)
+                return;
+
+            hasSetUp = true;
+
             if (NumberOfPanels == 0) return;
 
             // ScrollRect
