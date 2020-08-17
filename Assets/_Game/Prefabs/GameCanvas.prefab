@@ -466,7 +466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This game does not save
+  m_text: You will be reset to the last checkpoint
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06d56fca7e4efba498811e1ca191806c, type: 2}
   m_sharedMaterial: {fileID: -4160268534971353544, guid: 06d56fca7e4efba498811e1ca191806c,
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 77.35
+  m_fontSize: 66.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -536,12 +536,12 @@ MonoBehaviour:
   m_margin: {x: -292.10532, y: -54.093533, z: -297.5148, w: -54.09353}
   m_textInfo:
     textComponent: {fileID: 3284067771373834642}
-    characterCount: 23
+    characterCount: 40
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2977,7 +2977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 286.09647, y: 90.1806}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &261062582504357238

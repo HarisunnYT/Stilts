@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+    public static MovementController Instance;
+
     public Rigidbody LegPivot1;
     public Rigidbody LegPivot2;
 
@@ -11,9 +13,18 @@ public class MovementController : MonoBehaviour
 
     public bool InputEnabled { get; set; } = true;
 
+    public float TimePlayed { get { return Time.time - timeStarted; } }
+    private float timeStarted;
+
     private void Awake()
     {
+        Instance = this;
+
         Cursor.visible = false;
+        timeStarted = Time.time;
+
+        if (SaveManager.Instance.HasSavedData(SaveManager.Instance.CurrentMap))
+            transform.position = SaveManager.Instance.LoadCheckpoint();
     }
 
     private void Update()

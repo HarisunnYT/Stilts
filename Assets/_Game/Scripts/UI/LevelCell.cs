@@ -18,6 +18,7 @@ public class LevelCell : MonoBehaviour
     private RawImage previewImage;
 
     public string LevelName { get; private set; }
+    private string ownerName;
 
     public void Configure(AssetBundleLoader.WorkshopItem workshopItem)
     {
@@ -26,6 +27,7 @@ public class LevelCell : MonoBehaviour
         LoadPreviewImage(workshopItem.Item.PreviewImageUrl);
 
         LevelName = workshopItem.LevelName;
+        ownerName = workshopItem.Item.Owner.Name;
     }
 
     private async void LoadPreviewImage(string url)
@@ -68,6 +70,7 @@ public class LevelCell : MonoBehaviour
 
     public void PlayLevel()
     {
-        SceneManager.LoadScene(levelNameText.text);
+        SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerName);
+        SceneManager.LoadScene(LevelName);
     }
 }

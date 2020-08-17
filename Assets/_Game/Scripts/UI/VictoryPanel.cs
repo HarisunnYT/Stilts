@@ -15,7 +15,7 @@ public class VictoryPanel : Panel
     {
         Cursor.visible = true;
 
-        TimeSpan time = TimeSpan.FromSeconds(Time.time);
+        TimeSpan time = TimeSpan.FromSeconds(SaveManager.Instance.GetTimePlayed() + MovementController.Instance.TimePlayed);
         StringBuilder str = new StringBuilder();
 
         if (time.Hours > 0)
@@ -34,6 +34,8 @@ public class VictoryPanel : Panel
         str.Append("s");
 
         timeText.text = str.ToString();
+
+        SaveManager.Instance.ClearSavedData(SaveManager.Instance.CurrentMap);
     }
 
     public void Back()
