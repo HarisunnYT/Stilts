@@ -10,12 +10,15 @@ public class Cannon : MonoBehaviour
     private float timer = -1;
 
     private Animator animator;
+    private AudioSource audioSource;
 
     private bool playerWithinRadius = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
         timer = Time.time + delay;
     }
 
@@ -31,6 +34,8 @@ public class Cannon : MonoBehaviour
     private void Shoot()
     {
         animator.SetTrigger("Fire");
+        audioSource.Play();
+
         timer = Time.time + delay;
     }
 

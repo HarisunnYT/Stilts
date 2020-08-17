@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8951037293274652356}
   m_Layer: 10
   m_Name: SM_Prop_Drone_Quad_01
-  m_TagString: Untagged
+  m_TagString: Generic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

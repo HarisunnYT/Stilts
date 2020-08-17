@@ -23,8 +23,10 @@ public class MovementController : MonoBehaviour
         Cursor.visible = false;
         timeStarted = Time.time;
 
+#if !UNITY_EDITOR
         if (SaveManager.Instance.HasSavedData(SaveManager.Instance.CurrentMap))
             transform.position = SaveManager.Instance.LoadCheckpoint();
+#endif
     }
 
     private void Update()
@@ -47,5 +49,10 @@ public class MovementController : MonoBehaviour
             if (Input.GetAxisRaw("Leg2") < 0)
                 LegPivot2.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveManager.Instance.SaveTime(TimePlayed);
     }
 }
