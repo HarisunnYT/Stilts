@@ -13,7 +13,10 @@ public class GameManager : PersistentSingleton<GameManager>
     protected override void Initialize()
     {
         SceneManager.activeSceneChanged += ActiveSceneChanged;
+
+#if !UNITY_EDITOR
         Invoke("TriggerStartUpAchievements", 2);
+#endif
     }
 
     private async void TriggerStartUpAchievements()
