@@ -7,6 +7,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System;
 using UnityEngine.UI;
+using System.Linq;
+using Steamworks.Data;
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -18,10 +20,18 @@ public class WorkshopUploader : MonoBehaviour
         EditorWindow.GetWindow(typeof(WorkshopUploaderWindow));
     }
 
-    public static async void Upload(string title, string description, string iconPath)
+    public static async void Upload(ulong ID, string title, string description, string iconPath)
     {
+        Steamworks.Ugc.Editor commFile;
+        if (ID == 0)
+            commFile = Steamworks.Ugc.Editor.NewCommunityFile;
+        else
+        {
+            PublishedFileId publishedId = new PublishedFileId() { Value = ID };
+            commFile = new Steamworks.Ugc.Editor(publishedId);
+        }
+
         string path = Application.streamingAssetsPath  + "/WorkshopItem";
-        var commFile = Steamworks.Ugc.Editor.NewCommunityFile;
 
         DirectoryInfo directory = new DirectoryInfo(path);
 
@@ -61,6 +71,8 @@ public class WorkshopUploaderWindow : EditorWindow
 
     string title = "Awesome level";
     string description = "New Workshop Item";
+    string workshopId = "Workshop ID eg: 2199949864";
+
     private string iconPath = "";
 
     private void OnGUI()
@@ -78,8 +90,25 @@ public class WorkshopUploaderWindow : EditorWindow
             ChooseIcon();
         EditorGUILayout.EndHorizontal();
 
+        EditorGUILayout.BeginHorizontal();
+        workshopId = EditorGUILayout.TextField(workshopId);
+        EditorGUILayout.LabelField("Use an existing ID to edit workshop item (leave empty for new item)");
+        EditorGUILayout.EndHorizontal();
+
         if (GUILayout.Button("Submit"))
-            WorkshopUploader.Upload(title, description, iconPath);
+        {
+            ulong id = 0;
+            if (!string.IsNullOrEmpty(workshopId))
+            {
+                if (workshopId.Any(x => char.IsLetter(x)) || !ulong.TryParse(workshopId, out id))
+                {
+                    EditorUtility.DisplayDialog("ID contains letters", "Enter a valid workshop ID or leave empty", "Yes");
+                    return;
+                }
+            }
+
+            WorkshopUploader.Upload(id, title, description, iconPath);
+        }
     }
 
     private void ChooseIcon()
