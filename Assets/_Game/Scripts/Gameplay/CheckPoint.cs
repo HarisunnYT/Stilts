@@ -13,8 +13,13 @@ public class CheckPoint : MonoBehaviour
         if (!triggered && other.tag == "Player")
         {
             triggered = true;
-            SaveManager.Instance.SavePosition(transform.position);
-            SaveManager.Instance.SaveTime(other.GetComponent<MovementController>().TimePlayed);
+            if (SaveManager.Instance)
+            {
+                SaveManager.Instance.SavePosition(transform.position);
+                SaveManager.Instance.SaveTime(other.GetComponent<MovementController>().TimePlayed);
+            }
+
+            Debug.Log("Checkpoint Triggered");
         }
     }
 }

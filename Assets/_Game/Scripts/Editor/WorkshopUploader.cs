@@ -42,13 +42,10 @@ public class WorkshopUploader : MonoBehaviour
         commFile.WithPreviewFile(iconPath);
         commFile.WithPublicVisibility();
 
-        SteamClient.Init(1394510);
         var result = await commFile.SubmitAsync(new ProgressClass());
 
         Application.OpenURL("https://steamcommunity.com/sharedfiles/filedetails/?id=" + result.FileId + "&searchtext=");
         Debug.Log("Upload Complete");
-
-        SteamClient.Shutdown();
     }
 
     class ProgressClass : IProgress<float>
@@ -77,6 +74,14 @@ public class WorkshopUploaderWindow : EditorWindow
 
     private void OnGUI()
     {
+        if (GUILayout.Button("Build Bundles"))
+        {
+            if (!Directory.Exists(Application.streamingAssetsPath + "/WorkshopItem"))
+                Directory.CreateDirectory(Application.streamingAssetsPath + "/WorkshopItem");
+
+            BuildPipeline.BuildAssetBundles(Application.streamingAssetsPath + "/WorkshopItem", BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
+        }
+
         EditorGUILayout.LabelField("Title");
         title = EditorGUILayout.TextField(title);
 
@@ -109,6 +114,13 @@ public class WorkshopUploaderWindow : EditorWindow
 
             WorkshopUploader.Upload(id, title, description, iconPath);
         }
+
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Init Steam"))
+            SteamClient.Init(1394510);
+        if (GUILayout.Button("Shutdown Steam"))
+            SteamClient.Shutdown();
+        EditorGUILayout.EndHorizontal();
     }
 
     private void ChooseIcon()

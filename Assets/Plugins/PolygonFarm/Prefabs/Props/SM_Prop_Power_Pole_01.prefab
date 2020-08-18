@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 854565044}
   m_Layer: 0
   m_Name: SM_Prop_Power_Pole_01
-  m_TagString: Untagged
+  m_TagString: Generic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 5385618344356298531}
   m_Layer: 0
   m_Name: Collider (1)
-  m_TagString: Wood
+  m_TagString: Generic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 4086780702901284086}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Wood
+  m_TagString: Generic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11,6 +11,17 @@ public class VictoryPanel : Panel
     [SerializeField]
     private TMP_Text timeText;
 
+    public override void Initialise()
+    {
+        CompleteTrigger.Instance.OnComplete += ShowPanel;
+    }
+
+    private void OnDestroy()
+    {
+        if (CompleteTrigger.Instance)
+            CompleteTrigger.Instance.OnComplete -= ShowPanel;
+    }
+
     protected override void OnShow()
     {
         Cursor.visible = true;

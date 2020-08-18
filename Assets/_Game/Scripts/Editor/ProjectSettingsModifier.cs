@@ -36,14 +36,15 @@ public class ProjectSettingsModifier : MonoBehaviour
         serializedObject = new SerializedObject(tagManagerAsset);
 
         SerializedProperty tagsProp = serializedObject.FindProperty("tags");
-        tagsProp.arraySize = tagsProp.arraySize + 5;
+        tagsProp.arraySize = tagsProp.arraySize + 6;
         serializedObject.ApplyModifiedProperties();
 
-        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 5).stringValue = "Grass";
-        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 4).stringValue = "Stone";
-        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 3).stringValue = "Wood";
-        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 2).stringValue = "Metal";
-        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 1).stringValue = "Generic";
+        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 6).stringValue = "Grass";
+        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 5).stringValue = "Stone";
+        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 4).stringValue = "Wood";
+        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 3).stringValue = "Metal";
+        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 2).stringValue = "Generic";
+        tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 1).stringValue = "Glass";
 
         serializedObject.ApplyModifiedProperties();
 
