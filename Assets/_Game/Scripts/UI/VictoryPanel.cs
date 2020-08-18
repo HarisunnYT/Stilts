@@ -15,7 +15,9 @@ public class VictoryPanel : Panel
     {
         Cursor.visible = true;
 
-        TimeSpan time = TimeSpan.FromSeconds(SaveManager.Instance.GetTimePlayed() + MovementController.Instance.TimePlayed);
+        float completeTime = SaveManager.Instance.GetTimePlayed() + MovementController.Instance.TimePlayed;
+
+        TimeSpan time = TimeSpan.FromSeconds(completeTime);
         StringBuilder str = new StringBuilder();
 
         if (time.Hours > 0)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Steamworks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,5 +51,20 @@ public class SaveManager : PersistentSingleton<SaveManager>
     public void SetCurrentMap(string mapName)
     {
         CurrentMap = mapName;
+    }
+
+    public void CommunityLevelPlayed(string mapName)
+    {
+        if (!PlayerPrefs.HasKey(mapName + "_played"))
+        {
+            PlayerPrefs.SetString(mapName + "_played", "true");
+            SteamUserStats.AddStat("community_levels_played", 1);
+
+            if (SteamUserStats.GetStatInt("community_levels_played") > 5)
+                AchievementManager.CompleteAchievement("played_5_comm_levels");
+
+            if (mapName.Contains(SteamClient.SteamId.Value.ToString()))
+                AchievementManager.CompleteAchievement("play_own_level");
+        }
     }
 }

@@ -23,6 +23,8 @@ public class Leg : MonoBehaviour
     private Vector3 originalPosition;
     private Quaternion originalRotation;
 
+    private Vector3 lastGroundedPosition = Vector3.zero;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -36,6 +38,18 @@ public class Leg : MonoBehaviour
             if (audioData != null)
                 PlaySound(audioData.GetRandomClip(), collision);
         }
+
+        if (lastGroundedPosition != Vector3.zero)
+        {
+            float distance = Vector3.Distance(lastGroundedPosition, transform.position);
+            if (distance > 150)
+                AchievementManager.CompleteAchievement("big_fall");
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        lastGroundedPosition = transform.position;
     }
 
     public void PlaySound(AudioClip sound, float volume)

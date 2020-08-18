@@ -21,7 +21,7 @@ public class LevelCell : MonoBehaviour
     private GameObject continueObj;
 
     public string LevelName { get; private set; }
-    private string ownerName;
+    private ulong ownerId;
 
     public void Configure(AssetBundleLoader.WorkshopItem workshopItem)
     {
@@ -30,8 +30,8 @@ public class LevelCell : MonoBehaviour
         LoadPreviewImage(workshopItem.Item.PreviewImageUrl);
 
         LevelName = workshopItem.LevelName;
-        ownerName = workshopItem.Item.Owner.Name;
-        continueObj.SetActive(SaveManager.Instance.HasSavedData(LevelName + "_" + ownerName));
+        ownerId = workshopItem.Item.Owner.Id.Value;
+        continueObj.SetActive(SaveManager.Instance.HasSavedData(LevelName + "_" + ownerId));
     }
 
     private async void LoadPreviewImage(string url)
@@ -74,14 +74,16 @@ public class LevelCell : MonoBehaviour
 
     public void Continue()
     {
-        SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerName);
+        SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerId);
+        SaveManager.Instance.CommunityLevelPlayed(LevelName + "_" + ownerId);
         SceneManager.LoadScene(LevelName);
     }
 
     public void NewGame()
     {
-        SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerName);
-        SaveManager.Instance.ClearSavedData(LevelName + "_" + ownerName);
+        SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerId);
+        SaveManager.Instance.CommunityLevelPlayed(LevelName + "_" + ownerId);
+        SaveManager.Instance.ClearSavedData(LevelName + "_" + ownerId);
         SceneManager.LoadScene(LevelName);
     }
 }

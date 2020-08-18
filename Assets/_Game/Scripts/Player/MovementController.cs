@@ -53,6 +53,7 @@ public class MovementController : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveManager.Instance.SaveTime(TimePlayed);
+        if (SaveManager.Instance)
+            SaveManager.Instance.SaveTime(TimePlayed);
     }
 }
