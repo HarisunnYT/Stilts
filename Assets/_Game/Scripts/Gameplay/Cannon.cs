@@ -41,13 +41,13 @@ public class Cannon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.layer == LayerMask.NameToLayer("Leg"))
             playerWithinRadius = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.layer == LayerMask.NameToLayer("Leg"))
             playerWithinRadius = false;
     }
 }
