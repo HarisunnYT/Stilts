@@ -13,12 +13,13 @@ public class MovementController : MonoBehaviour
     private float rotationSpeed = 75;
 
     public bool InputEnabled { get; set; } = true;
-    public float ExpressionMetre { get; private set; }
+    private float expressionMetre;
 
     public float TimePlayed { get { return Time.time - timeStarted; } }
     private float timeStarted;
 
     private Rigidbody body;
+    private Animator animator;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class MovementController : MonoBehaviour
         timeStarted = Time.time;
 
         body = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
 
 #if !UNITY_EDITOR
         if (SaveManager.Instance.HasSavedData(SaveManager.Instance.CurrentMap))
@@ -55,8 +57,8 @@ public class MovementController : MonoBehaviour
                 LegPivot2.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
         }
 
-        if (body.velocity.magnitude > 50)
-            ExpressionMetre = 1;
+        if (body.velocity.magnitude > 25)
+            expressionMetre = 1;
         else
         {
             float leg1Vel = Mathf.Abs(LegPivot1.angularVelocity.z);
@@ -64,10 +66,12 @@ public class MovementController : MonoBehaviour
 
             if ((leg1Vel > 0.1f && leg1Vel < 0.6f && leg2Vel < 0.3f) ||
                 (leg2Vel > 0.1f && leg2Vel < 0.6f && leg1Vel < 0.3f))
-                ExpressionMetre = 0;
+                expressionMetre = 0;
             else
-                ExpressionMetre = 0.5f;
+                expressionMetre = 0.5f;
         }
+
+        animator.SetFloat("Expression", expressionMetre);
     }
 
     public void SetInputEnable(bool enabled)
