@@ -5,7 +5,7 @@ using UnityEngine;
 public class Leg : MonoBehaviour
 {
     [SerializeField]
-    private float audioDelay = 1;
+    private float delay = 1;
 
     [SerializeField]
     private float soundDamper = 15;
@@ -14,11 +14,11 @@ public class Leg : MonoBehaviour
     private float pitchOffset = 0.2f;
 
     [SerializeField]
-    private AudioDataList audioList;
+    private TagDataList dataList;
 
     private AudioSource audioSource;
 
-    private float audioTimer = 0;
+    private float timer = 0;
 
     private Vector3 originalPosition;
     private Quaternion originalRotation;
@@ -32,11 +32,14 @@ public class Leg : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (Time.time > audioTimer)
+        if (Time.time > timer)
         {
-            AudioData audioData = audioList.GetAudioData(collision.transform.tag);
-            if (audioData != null)
-                PlaySound(audioData.GetRandomClip(), collision);
+            TagData data = dataList.GetTagData(collision.transform.tag);
+            if (data != null)
+            {
+                PlayParticle(data.GetRandomParticle(), collision);
+                PlaySound(data.GetRandomClip(), collision);
+            }
         }
 
         if (lastGroundedPosition != Vector3.zero)
@@ -60,11 +63,23 @@ public class Leg : MonoBehaviour
         audioSource.clip = sound;
         audioSource.Play();
 
-        audioTimer = Time.time + audioDelay;
+        timer = Time.time + delay;
     }
 
     public void PlaySound(AudioClip sound, Collision collision)
     {
         PlaySound(sound, collision.relativeVelocity.magnitude / soundDamper);
+    }
+
+    private void PlayParticle(GameObject particlePrefab, Collision collision)
+    {
+        if (particlePrefab == null)
+            return;
+
+        GameObject particle = ObjectPooler.GetPooledObject(particlePrefab);
+        Vector3 point = collision.GetContact(0).point;
+        particle.transform.position = new Vector3(point.x, point.y, -50);
+        ParticleSystem.MainModule main = particle.GetComponent<ParticleSystem>().main;
+        main.maxParticles = (int)(collision.relativeVelocity.magnitude / 2);
     }
 }

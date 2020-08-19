@@ -21,4 +21,13 @@ public class OnPlayerTouched : MonoBehaviour
             OnTouched?.Invoke();
         }
     }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (!triggered && collider.gameObject.layer == LayerMask.NameToLayer("Leg"))
+        {
+            triggered = occurOnce;
+            OnTouched?.Invoke();
+        }
+    }
 }

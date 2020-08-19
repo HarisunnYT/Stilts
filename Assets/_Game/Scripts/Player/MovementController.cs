@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     public Rigidbody LegPivot1;
     public Rigidbody LegPivot2;
 
+    [SerializeField]
     private float rotationSpeed = 75;
 
     public bool InputEnabled { get; set; } = true;
@@ -67,6 +68,11 @@ public class MovementController : MonoBehaviour
             else
                 ExpressionMetre = 0.5f;
         }
+    }
+
+    public void SetInputEnable(bool enabled)
+    {
+        InputEnabled = enabled;
     }
 
     private void OnApplicationQuit()

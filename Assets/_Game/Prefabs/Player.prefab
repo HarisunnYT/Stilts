@@ -243,11 +243,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4394634149044518776}
+  - component: {fileID: 4394634149044518754}
   - component: {fileID: 4394634149044518780}
   - component: {fileID: 4394634149044518781}
   - component: {fileID: 4394634149044518782}
   - component: {fileID: 4394634149044518783}
-  - component: {fileID: 4394634149044518754}
   - component: {fileID: 4394634149044518755}
   m_Layer: 8
   m_Name: Stilt 1 Pivot
@@ -272,6 +272,22 @@ Transform:
   m_Father: {fileID: 4394634148880736169}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -140}
+--- !u!114 &4394634149044518754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4394634149044518777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7d9eb5ffdbe5042aa81ef9286ebd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.3
+  soundDamper: 15
+  pitchOffset: 0.15
+  dataList: {fileID: 11400000, guid: 6c27ad40fa5c6d54f8f5287bfb690f94, type: 2}
 --- !u!54 &4394634149044518780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -409,22 +425,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4394634149044518754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4394634149044518777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d7d9eb5ffdbe5042aa81ef9286ebd1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioDelay: 0.35
-  soundDamper: 15
-  pitchOffset: 0.15
-  audioList: {fileID: 11400000, guid: 2057b51d6b68f1c41a3bee6e1faaccb5, type: 2}
 --- !u!82 &4394634149044518755
 AudioSource:
   m_ObjectHideFlags: 0
@@ -877,11 +877,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4394634149959732524}
+  - component: {fileID: 4394634149959732694}
   - component: {fileID: 4394634149959732688}
   - component: {fileID: 4394634149959732689}
   - component: {fileID: 4394634149959732690}
   - component: {fileID: 4394634149959732691}
-  - component: {fileID: 4394634149959732694}
   - component: {fileID: 4394634149959732695}
   m_Layer: 8
   m_Name: Stilt 2 Pivot
@@ -906,6 +906,22 @@ Transform:
   m_Father: {fileID: 4394634148880736169}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -67.7}
+--- !u!114 &4394634149959732694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4394634149959732525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7d9eb5ffdbe5042aa81ef9286ebd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.3
+  soundDamper: 15
+  pitchOffset: 0.15
+  dataList: {fileID: 11400000, guid: 6c27ad40fa5c6d54f8f5287bfb690f94, type: 2}
 --- !u!54 &4394634149959732688
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1043,22 +1059,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4394634149959732694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4394634149959732525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d7d9eb5ffdbe5042aa81ef9286ebd1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioDelay: 0.35
-  soundDamper: 15
-  pitchOffset: 0.15
-  audioList: {fileID: 11400000, guid: 2057b51d6b68f1c41a3bee6e1faaccb5, type: 2}
 --- !u!82 &4394634149959732695
 AudioSource:
   m_ObjectHideFlags: 0

@@ -6,6 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class CheckPoint : MonoBehaviour
 {
+    [SerializeField]
+    private Material triggeredMaterial;
+
+    [SerializeField]
+    private MeshRenderer flagRenderer;
+
+    [SerializeField]
+    private GameObject triggeredParticle;
+
     private bool triggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -18,6 +27,9 @@ public class CheckPoint : MonoBehaviour
                 SaveManager.Instance.SavePosition(transform.position);
                 SaveManager.Instance.SaveTime(other.GetComponent<MovementController>().TimePlayed);
             }
+
+            flagRenderer.material = triggeredMaterial;
+            triggeredParticle.SetActive(true);
 
             Debug.Log("Checkpoint Triggered");
         }
