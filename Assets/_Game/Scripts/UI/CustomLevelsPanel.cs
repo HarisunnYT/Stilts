@@ -21,6 +21,9 @@ public class CustomLevelsPanel : Panel
     [SerializeField]
     private Transform levelCellContent;
 
+    [SerializeField]
+    private GameObject message;
+
     protected override void OnShow()
     {
         player.SetActive(false);
@@ -50,6 +53,8 @@ public class CustomLevelsPanel : Panel
             if (needsDeleting)
                 scroller.Remove(i);
         }
+
+        message.SetActive(scroller.Panels.Count == 0);
     }
 
     public void Refresh()

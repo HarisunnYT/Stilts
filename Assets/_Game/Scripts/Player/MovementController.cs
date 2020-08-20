@@ -33,10 +33,10 @@ public class MovementController : MonoBehaviour
         body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-//#if !UNITY_EDITOR
+#if !UNITY_EDITOR
         if (mainController && SaveManager.Instance.HasSavedData(SaveManager.Instance.CurrentMap))
             transform.position = SaveManager.Instance.LoadCheckpoint();
-//#endif
+#endif
     }
 
     private void Update()

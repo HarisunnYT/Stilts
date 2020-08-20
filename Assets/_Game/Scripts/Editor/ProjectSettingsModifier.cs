@@ -46,17 +46,7 @@ public class ProjectSettingsModifier : MonoBehaviour
         tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 2).stringValue = "Generic";
         tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 1).stringValue = "Glass";
 
-        SerializedProperty layersProp = serializedObject.FindProperty("layers");
-        layersProp.arraySize = layersProp.arraySize + 4;
         serializedObject.ApplyModifiedProperties();
-
-        layersProp.GetArrayElementAtIndex(layersProp.arraySize - 4).stringValue = "Leg";
-        layersProp.GetArrayElementAtIndex(layersProp.arraySize - 3).stringValue = "Body";
-        layersProp.GetArrayElementAtIndex(layersProp.arraySize - 2).stringValue = "Environment";
-        layersProp.GetArrayElementAtIndex(layersProp.arraySize - 1).stringValue = "Head";
-
-        serializedObject.ApplyModifiedProperties();
-
         AssetDatabase.Refresh();
     }
 
