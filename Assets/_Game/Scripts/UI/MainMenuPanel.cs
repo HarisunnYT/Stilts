@@ -8,14 +8,29 @@ using UnityEngine.UI;
 public class MainMenuPanel : Panel
 {
     [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
     private GameObject continueObj;
+
+    [SerializeField]
+    private GameObject cursorCollider;
 
     [SerializeField]
     private Button customLevelsButton;
 
+    private Camera camera;
+
+    private void Start()
+    {
+        camera = Camera.main;
+    }
+
     protected override void OnShow()
     {
+        player.SetActive(true);
         continueObj.SetActive(SaveManager.Instance.HasSavedData(SaveManager.CampaignMapName));
+
         try
         {
             bool b = SteamClient.IsLoggedOn;
@@ -24,6 +39,12 @@ public class MainMenuPanel : Panel
         {
             customLevelsButton.interactable = false;
         }
+    }
+
+    private void Update()
+    {
+        Vector3 target = camera.ScreenToWorldPoint(Input.mousePosition);
+        cursorCollider.transform.position = new Vector3(target.x, target.y, 0);
     }
 
     public void Continue()

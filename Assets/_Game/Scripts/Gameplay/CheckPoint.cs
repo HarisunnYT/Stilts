@@ -23,10 +23,7 @@ public class CheckPoint : MonoBehaviour
         {
             triggered = true;
             if (SaveManager.Instance)
-            {
                 SaveManager.Instance.SavePosition(transform.position);
-                SaveManager.Instance.SaveTime(other.GetComponent<MovementController>().TimePlayed);
-            }
 
             flagRenderer.material = triggeredMaterial;
             triggeredParticle.SetActive(true);

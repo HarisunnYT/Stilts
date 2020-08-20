@@ -12,6 +12,9 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 75;
 
+    [SerializeField]
+    private bool mainController = true;
+
     public bool InputEnabled { get; set; } = true;
     private float expressionMetre;
 
@@ -30,10 +33,10 @@ public class MovementController : MonoBehaviour
         body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-#if !UNITY_EDITOR
-        if (SaveManager.Instance.HasSavedData(SaveManager.Instance.CurrentMap))
+//#if !UNITY_EDITOR
+        if (mainController && SaveManager.Instance.HasSavedData(SaveManager.Instance.CurrentMap))
             transform.position = SaveManager.Instance.LoadCheckpoint();
-#endif
+//#endif
     }
 
     private void Update()

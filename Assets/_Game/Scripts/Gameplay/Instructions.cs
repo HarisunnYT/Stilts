@@ -52,6 +52,7 @@ public class Instructions : MonoBehaviour
 
     private void ShowLeg2()
     {
+        //leg1.SetTrigger("Stop");
         leg2.SetTrigger("Show");
     }
 

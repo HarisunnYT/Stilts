@@ -5,7 +5,7 @@ using Steamworks;
 
 public class SteamManager : PersistentSingleton<SteamManager>
 {
-    private void Start()
+    protected override void Initialize()
     {
         SteamClient.Init(1394510);
     }

@@ -1,10 +1,14 @@
 ﻿using DanielLochner.Assets.SimpleScrollSnap;
+using Steamworks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CustomLevelsPanel : Panel
 {
+    [SerializeField]
+    private GameObject player;
+
     [SerializeField]
     private GameObject levelCellPrefab;
 
@@ -19,6 +23,8 @@ public class CustomLevelsPanel : Panel
 
     protected override void OnShow()
     {
+        player.SetActive(false);
+
         foreach (var workshopItem in AssetBundleLoader.Instance.LoadedWorkshopItems)
         {
             bool exists = false;
@@ -58,5 +64,10 @@ public class CustomLevelsPanel : Panel
 
         GameObject obj = scroller.Add(levelCellPrefab, 0);
         obj.GetComponent<LevelCell>().Configure(workshopItem);
+    }
+
+    public void OpenWorkshop()
+    {
+        SteamFriends.OpenWebOverlay("https://steamcommunity.com/app/1394510/workshop/");
     }
 }
