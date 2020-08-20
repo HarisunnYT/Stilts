@@ -19,10 +19,14 @@ public static class AchievementManager
 
     public static void CompleteAchievement(string achievementName)
     {
-        foreach (var achievement in SteamUserStats.Achievements)
+        try
         {
-            if (achievement.Identifier == achievementName)
-                achievement.Trigger();
+            foreach (var achievement in SteamUserStats.Achievements)
+            {
+                if (achievement.Identifier == achievementName)
+                    achievement.Trigger();
+            }
         }
+        catch (System.Exception e) { }
     }
 }

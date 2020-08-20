@@ -1,16 +1,29 @@
-﻿using System.Collections;
+﻿using Steamworks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuPanel : Panel
 {
     [SerializeField]
     private GameObject continueObj;
 
+    [SerializeField]
+    private Button customLevelsButton;
+
     protected override void OnShow()
     {
         continueObj.SetActive(SaveManager.Instance.HasSavedData(SaveManager.CampaignMapName));
+        try
+        {
+            bool b = SteamClient.IsLoggedOn;
+        }
+        catch (System.Exception e)
+        {
+            customLevelsButton.interactable = false;
+        }
     }
 
     public void Continue()
