@@ -18,14 +18,12 @@ public class PlayerSoundController : MonoBehaviour
     private float fallingSpeedThreshold = 10;
 
     [SerializeField]
-    private AudioClip[] fallingSounds;
-
-    [Space()]
-    [SerializeField]
-    private float pitchOffset = 0.1f;
+    private AudioClip fallingSound;
 
     private Rigidbody rigidbody;
     private AudioSource audioSource;
+
+    private bool falling = false;
 
     private void Awake()
     {
@@ -35,24 +33,34 @@ public class PlayerSoundController : MonoBehaviour
 
     private void Update()
     {
-        if (rigidbody.velocity.magnitude > fallingSpeedThreshold)
-            PlayRandomAudioClip(fallingSounds);
+        if (!falling && rigidbody.velocity.y < -fallingSpeedThreshold)
+        {
+            falling = true;
+            PlaySound(fallingSound);
+        }
     }
 
-    private void PlayRandomAudioClip(AudioClip[] clips)
+    private void PlaySound(AudioClip clip)
     {
-        if (audioSource.isPlaying)
-            return;
-
-        AudioClip clip =  clips[Random.Range(0, clips.Length)];
         audioSource.clip = clip;
-        audioSource.pitch = 1 + Random.Range(-pitchOffset, pitchOffset);
         audioSource.Play();
+    }
+
+    public void Landed()
+    {
+        if (falling)
+        {
+            falling = false;
+            AudioClip clip = hitSounds[Random.Range(0, hitSounds.Length)];
+            PlaySound(clip);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > hitImpactThreshold)
-            PlayRandomAudioClip(hitSounds);
+        {
+            Landed();
+        }
     }
 }

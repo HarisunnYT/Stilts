@@ -8,7 +8,13 @@ using UnityEngine.UI;
 public class MainMenuPanel : Panel
 {
     [SerializeField]
-    private GameObject player;
+    private Animator player;
+
+    [SerializeField]
+    private Transform leftEyeball;
+
+    [SerializeField]
+    private Transform rightEyeball;
 
     [SerializeField]
     private GameObject continueObj;
@@ -21,6 +27,11 @@ public class MainMenuPanel : Panel
 
     private Camera camera;
 
+    private float currentExpression;
+    private float targetExpression;
+
+    private const float expressionChangeSpeed = 5.0f;
+
     private void Start()
     {
         camera = Camera.main;
@@ -28,7 +39,7 @@ public class MainMenuPanel : Panel
 
     protected override void OnShow()
     {
-        player.SetActive(true);
+        player.gameObject.SetActive(true);
         continueObj.SetActive(SaveManager.Instance.HasSavedData(SaveManager.CampaignMapName));
 
         try
@@ -44,7 +55,21 @@ public class MainMenuPanel : Panel
     private void Update()
     {
         Vector3 target = camera.ScreenToWorldPoint(Input.mousePosition);
-        cursorCollider.transform.position = new Vector3(target.x, target.y, 0);
+        target.z = 0;
+        cursorCollider.transform.position = target;
+
+        currentExpression = Mathf.Lerp(currentExpression, targetExpression, expressionChangeSpeed * Time.deltaTime);
+        player.SetFloat("Expression", currentExpression);
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 target = camera.ScreenToWorldPoint(Input.mousePosition);
+        target.z = -15;
+        Vector3 dir = target - leftEyeball.transform.position;
+        leftEyeball.rotation = Quaternion.FromToRotation(-Vector3.right, dir);
+        dir = target - rightEyeball.transform.position;
+        rightEyeball.rotation = Quaternion.FromToRotation(Vector3.right, dir);
     }
 
     public void Continue()
@@ -68,5 +93,10 @@ public class MainMenuPanel : Panel
     public void CustomLevels()
     {
         AssetBundleLoader.Instance.LoadBundles();
+    }
+
+    public void SetExpression(float exp)
+    {
+        targetExpression = exp;
     }
 }

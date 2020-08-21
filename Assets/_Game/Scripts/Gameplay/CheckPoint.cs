@@ -28,6 +28,8 @@ public class CheckPoint : MonoBehaviour
             flagRenderer.material = triggeredMaterial;
             triggeredParticle.SetActive(true);
 
+            GetComponent<AudioSource>().Play();
+
             Debug.Log("Checkpoint Triggered");
         }
     }

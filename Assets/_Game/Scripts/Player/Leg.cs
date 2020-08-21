@@ -17,6 +17,7 @@ public class Leg : MonoBehaviour
     private TagDataList dataList;
 
     private AudioSource audioSource;
+    private PlayerSoundController playerSoundController;
 
     private float timer = 0;
 
@@ -28,6 +29,7 @@ public class Leg : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        playerSoundController = GetComponentInParent<PlayerSoundController>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -48,6 +50,8 @@ public class Leg : MonoBehaviour
             if (distance > 150)
                 AchievementManager.CompleteAchievement("big_fall");
         }
+
+        playerSoundController.Landed();
     }
 
     private void OnCollisionExit(Collision collision)
