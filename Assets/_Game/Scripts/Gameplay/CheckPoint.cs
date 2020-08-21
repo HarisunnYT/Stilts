@@ -26,9 +26,12 @@ public class CheckPoint : MonoBehaviour
                 SaveManager.Instance.SavePosition(transform.position);
 
             flagRenderer.material = triggeredMaterial;
-            triggeredParticle.SetActive(true);
 
-            GetComponent<AudioSource>().Play();
+            if (MovementController.Instance.TimePlayed > 5)
+            {
+                triggeredParticle.SetActive(true);
+                GetComponent<AudioSource>().Play();
+            }
 
             Debug.Log("Checkpoint Triggered");
         }
