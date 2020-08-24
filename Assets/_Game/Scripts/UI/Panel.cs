@@ -66,7 +66,10 @@ public class Panel : MonoBehaviour, IAnimationHandler
     public void ShowPanel()
     {
         if (gameObject.activeSelf)
+        {
+            OnShow();
             return;
+        }
 
         gameObject.SetActive(true);
 

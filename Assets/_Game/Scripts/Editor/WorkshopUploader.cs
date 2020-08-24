@@ -20,7 +20,7 @@ public class WorkshopUploader : MonoBehaviour
         EditorWindow.GetWindow(typeof(WorkshopUploaderWindow));
     }
 
-    public static async void Upload(ulong ID, string title, string description, string iconPath)
+    public static async void Upload(ulong ID, string title, string description, string iconPath, params string[] tags)
     {
         Steamworks.Ugc.Editor commFile;
         if (ID == 0)
@@ -38,9 +38,14 @@ public class WorkshopUploader : MonoBehaviour
         commFile.WithContent(directory);
         commFile.WithTitle(title);
         commFile.WithDescription(description);
-        commFile.WithTag("Level");
         commFile.WithPreviewFile(iconPath);
         commFile.WithPublicVisibility();
+
+        foreach(var tag in tags)
+        {
+            if (!string.IsNullOrEmpty(tag))
+                commFile.WithTag(tag);
+        }
 
         var result = await commFile.SubmitAsync(new ProgressClass());
 
@@ -72,6 +77,11 @@ public class WorkshopUploaderWindow : EditorWindow
 
     private string iconPath = "";
 
+    private bool easyState = false;
+    private bool hardState = false;
+    private bool hardcoreState = false;
+    private bool arcadeState = false;
+
     private void OnGUI()
     {
         if (GUILayout.Button("Build Bundles"))
@@ -100,6 +110,22 @@ public class WorkshopUploaderWindow : EditorWindow
         EditorGUILayout.LabelField("Use an existing ID to edit workshop item (leave empty for new item)");
         EditorGUILayout.EndHorizontal();
 
+        EditorGUILayout.LabelField("Tags");
+
+        string easyTag = "";
+        string hardTag = "";
+        string hardcoreTag = "";
+        string arcadeTag = "";
+
+        EditorGUILayout.BeginHorizontal();
+        easyTag = (easyState = GUILayout.Toggle(easyState, "Easy")) ? "Easy" : "";
+        hardTag = (hardState = GUILayout.Toggle(hardState, "Hard")) ? "Hard" : "";
+        hardcoreTag = (hardcoreState = GUILayout.Toggle(hardcoreState, "Hardcore")) ? "Hardcore" : "";
+        arcadeTag = (arcadeState = GUILayout.Toggle(arcadeState, "Arcade")) ? "Arcade" : "";
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space(100);
+
         if (GUILayout.Button("Submit"))
         {
             ulong id = 0;
@@ -112,7 +138,7 @@ public class WorkshopUploaderWindow : EditorWindow
                 }
             }
 
-            WorkshopUploader.Upload(id, title, description, iconPath);
+            WorkshopUploader.Upload(id, title, description, iconPath, easyTag, hardTag, hardcoreTag, arcadeTag);
         }
 
         EditorGUILayout.BeginHorizontal();
