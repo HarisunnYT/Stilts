@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameCanvasPrefab: {fileID: 3284067771336964010, guid: 9aa99919769566748bd76822584bc94e,
     type: 3}
+  audioMixer: {fileID: 24100000, guid: d26b08bd32e33c74aa7a7670fe44fa84, type: 2}
 --- !u!114 &8750825714661350019
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,32 @@ public class CameraManager : MonoBehaviour
     [SerializeField]
     private Vector3 offset;
 
+    [SerializeField]
+    private bool doZoom = true;
+
+    [SerializeField]
+    private float zoomoutVelocityThreshold = 10;
+
+    [SerializeField]
+    private float maxZoomOutDistance;
+
+    [SerializeField]
+    private float zoomOutSpeed = 2.5f;
+
+    [SerializeField]
+    private float zoomInSpeed = 2.5f;
+
+    private float startingDistance;
+
     private bool following = false;
+
+    private Camera camera;
+
+    private void Awake()
+    {
+        camera = GetComponent<Camera>();
+        startingDistance = camera.orthographicSize;
+    }
 
     public void StartFollowing()
     {
@@ -24,5 +49,13 @@ public class CameraManager : MonoBehaviour
     {
         if (following || FTU.Instance == null)
             transform.position = Vector3.Lerp(transform.position, new Vector3(target.position.x + offset.x, target.position.y + offset.y, target.position.z + offset.z), moveSpeed);
+
+        if (doZoom)
+        {
+            if (Mathf.Abs(MovementController.Instance.Body.velocity.y) > zoomoutVelocityThreshold)
+                camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, maxZoomOutDistance, Time.deltaTime * zoomOutSpeed);
+            else
+                camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, startingDistance, Time.deltaTime * zoomInSpeed);
+        }
     }
 }

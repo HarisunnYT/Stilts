@@ -21,7 +21,8 @@ public class MovementController : MonoBehaviour
     public float TimePlayed { get { return Time.time - timeStarted; } }
     private float timeStarted;
 
-    private Rigidbody body;
+    public Rigidbody Body { get; private set; }
+
     private Animator animator;
 
     private void Awake()
@@ -30,7 +31,7 @@ public class MovementController : MonoBehaviour
         Cursor.visible = false;
         timeStarted = Time.time;
 
-        body = GetComponent<Rigidbody>();
+        Body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
 #if !UNITY_EDITOR
@@ -60,7 +61,7 @@ public class MovementController : MonoBehaviour
                 LegPivot2.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
         }
 
-        if (body.velocity.magnitude > 25)
+        if (Body.velocity.magnitude > 25)
             expressionMetre = 1;
         else
         {

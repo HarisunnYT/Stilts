@@ -42,6 +42,8 @@ public class MainMenuPanel : Panel
         player.gameObject.SetActive(true);
         continueObj.SetActive(SaveManager.Instance.HasSavedData(SaveManager.CampaignMapName));
 
+        Cursor.visible = true;
+
         try
         {
             bool b = SteamClient.IsLoggedOn;
@@ -50,6 +52,11 @@ public class MainMenuPanel : Panel
         {
             customLevelsButton.interactable = false;
         }
+    }
+
+    protected override void OnClose()
+    {
+        player.gameObject.SetActive(false);
     }
 
     private void Update()
