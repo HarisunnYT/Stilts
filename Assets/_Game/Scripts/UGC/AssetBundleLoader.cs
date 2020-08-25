@@ -30,19 +30,26 @@ public class AssetBundleLoader : PersistentSingleton<AssetBundleLoader>
 
     private async void QueryLevels()
     {
-        var query = Query.Items.WithTag("Level");
-        var task = await query.GetPageAsync(1);
-        StartCoroutine(LoadBundlesIE(task.Value.Entries));
-    }
-
-    private IEnumerator LoadBundlesIE(IEnumerable<Item> items)
-    {
         foreach (var bundle in loadedBundles)
             bundle.Unload(true);
 
         loadedBundles.Clear();
         LoadedWorkshopItems.Clear();
 
+        var query = Query.Items;
+
+        for (int i = 1; i < 5; i++)
+        {
+            var task = await query.GetPageAsync(i);
+            if (!task.HasValue) //no more pages
+                break;
+
+            StartCoroutine(LoadBundlesIE(task.Value.Entries));
+        }
+    }
+
+    private IEnumerator LoadBundlesIE(IEnumerable<Item> items)
+    {
         PanelManager.Instance.ShowPanel<LoadingBundlesPanel>();
 
         foreach (var item in items)
