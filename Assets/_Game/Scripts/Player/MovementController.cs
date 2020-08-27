@@ -27,9 +27,12 @@ public class MovementController : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        Cursor.visible = false;
-        timeStarted = Time.time;
+        if (mainController)
+        {
+            Instance = this;
+            Cursor.visible = false;
+            timeStarted = Time.time;
+        }
 
         Body = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();

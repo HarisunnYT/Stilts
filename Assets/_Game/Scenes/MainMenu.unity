@@ -339,6 +339,7 @@ MonoBehaviour:
   continueObj: {fileID: 936147270}
   cursorCollider: {fileID: 596235842}
   customLevelsButton: {fileID: 618374330}
+  newGameText: {fileID: 601621487}
 --- !u!1 &116634597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1037,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expressionValue: 0
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &213707983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1895,6 +1899,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expressionValue: 1
+  onExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 108180000}
+        m_MethodName: ExitedNewGameButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &601621490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2232,6 +2250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expressionValue: 0.5
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &618374332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3177,7 +3198,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}
@@ -3264,6 +3285,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expressionValue: 1
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &936147276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3776,6 +3800,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expressionValue: 0.5
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1009831583
 MonoBehaviour:
   m_ObjectHideFlags: 0

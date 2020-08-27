@@ -1,7 +1,9 @@
 ﻿using Steamworks;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -25,12 +27,17 @@ public class MainMenuPanel : Panel
     [SerializeField]
     private Button customLevelsButton;
 
+    [SerializeField]
+    private TMP_Text newGameText;
+
     private Camera camera;
 
     private float currentExpression;
     private float targetExpression;
 
     private const float expressionChangeSpeed = 5.0f;
+
+    private bool clickedNewGame = false;
 
     private void Start()
     {
@@ -52,6 +59,8 @@ public class MainMenuPanel : Panel
         {
             customLevelsButton.interactable = false;
         }
+
+        ExitedNewGameButton();
     }
 
     protected override void OnClose()
@@ -87,9 +96,17 @@ public class MainMenuPanel : Panel
 
     public void NewGame()
     {
-        SaveManager.Instance.SetCurrentMap(SaveManager.CampaignMapName);
-        SaveManager.Instance.ClearSavedData(SaveManager.CampaignMapName);
-        SceneManager.LoadScene("Game");
+        if (SaveManager.Instance.HasSavedData(SaveManager.CampaignMapName) && !clickedNewGame)
+        {
+            clickedNewGame = true;
+            newGameText.text = "Are you sure?";
+        }
+        else
+        {
+            SaveManager.Instance.SetCurrentMap(SaveManager.CampaignMapName);
+            SaveManager.Instance.ClearSavedData(SaveManager.CampaignMapName);
+            SceneManager.LoadScene("Game");
+        }
     }
 
     public void Quit()
@@ -100,6 +117,13 @@ public class MainMenuPanel : Panel
     public void CustomLevels()
     {
         AssetBundleLoader.Instance.LoadBundles();
+    }
+
+    public void ExitedNewGameButton()
+    {
+        newGameText.text = "New Game";
+        clickedNewGame = false;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void SetExpression(float exp)

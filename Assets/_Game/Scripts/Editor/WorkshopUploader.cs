@@ -81,6 +81,10 @@ public class WorkshopUploaderWindow : EditorWindow
     private bool hardState = false;
     private bool hardcoreState = false;
     private bool arcadeState = false;
+    private bool sportState = false;
+    private bool memeState = false;
+    private bool puzzleState = false;
+    private bool simulationState = false;
 
     private void OnGUI()
     {
@@ -116,12 +120,20 @@ public class WorkshopUploaderWindow : EditorWindow
         string hardTag = "";
         string hardcoreTag = "";
         string arcadeTag = "";
+        string sportTag = "";
+        string memeTag = "";
+        string puzzleTag = "";
+        string sumulationTag = "";
 
         EditorGUILayout.BeginHorizontal();
         easyTag = (easyState = GUILayout.Toggle(easyState, "Easy")) ? "Easy" : "";
         hardTag = (hardState = GUILayout.Toggle(hardState, "Hard")) ? "Hard" : "";
         hardcoreTag = (hardcoreState = GUILayout.Toggle(hardcoreState, "Hardcore")) ? "Hardcore" : "";
         arcadeTag = (arcadeState = GUILayout.Toggle(arcadeState, "Arcade")) ? "Arcade" : "";
+        sportTag = (sportState = GUILayout.Toggle(sportState, "Sport")) ? "Sport" : "";
+        memeTag = (memeState = GUILayout.Toggle(memeState, "Meme")) ? "Meme" : "";
+        puzzleTag = (puzzleState = GUILayout.Toggle(puzzleState, "Puzzle")) ? "Puzzle" : "";
+        sumulationTag = (simulationState = GUILayout.Toggle(simulationState, "Simulation")) ? "Simluation" : "";
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space(100);
