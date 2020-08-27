@@ -13,6 +13,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField]
     private Vector3 offset;
 
+    [Header("Zoom")]
     [SerializeField]
     private bool doZoom = true;
 
@@ -28,7 +29,11 @@ public class CameraManager : MonoBehaviour
     [SerializeField]
     private float zoomInSpeed = 2.5f;
 
+    [SerializeField]
+    private float zoomTimeDelay = 1.5f;
+
     private float startingDistance;
+    private float zoomTimer = -1;
 
     private bool following = false;
 
@@ -53,9 +58,19 @@ public class CameraManager : MonoBehaviour
         if (doZoom)
         {
             if (Mathf.Abs(MovementController.Instance.Body.velocity.y) > zoomoutVelocityThreshold)
-                camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, maxZoomOutDistance, Time.deltaTime * zoomOutSpeed);
+            {
+                if (zoomTimer == -1)
+                    zoomTimer = Time.time + zoomTimeDelay;
+
+                if (Time.time > zoomTimer)
+                    camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, maxZoomOutDistance, Time.deltaTime * zoomOutSpeed);
+            }
             else
+            {
+                zoomTimer = -1;
                 camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, startingDistance, Time.deltaTime * zoomInSpeed);
+            }
+
         }
     }
 }

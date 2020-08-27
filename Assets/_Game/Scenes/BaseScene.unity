@@ -225,12 +225,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 315090170}
   moveSpeed: 10
-  offset: {x: 0, y: -1.5, z: -300}
+  offset: {x: 0, y: -1, z: -300}
   doZoom: 1
-  zoomoutVelocityThreshold: 10
-  maxZoomOutDistance: 0
-  zoomOutSpeed: 2.5
-  zoomInSpeed: 2.5
+  zoomoutVelocityThreshold: 20
+  maxZoomOutDistance: 17
+  zoomOutSpeed: 5
+  zoomInSpeed: 1
+  zoomTimeDelay: 1
 --- !u!20 &551329825
 Camera:
   m_ObjectHideFlags: 0
