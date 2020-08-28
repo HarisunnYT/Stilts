@@ -22,14 +22,16 @@ public class GameManager : PersistentSingleton<GameManager>
 
     protected override void Initialize()
     {
+        SteamClient.Init(1394510);
+
         SceneManager.activeSceneChanged += ActiveSceneChanged;
 
 #if !UNITY_EDITOR
         Invoke("TriggerStartUpAchievements", 2);
 #endif
 
-        MusicVolume = PlayerPrefs.GetFloat("MusicVolume");
-        SoundsVolume = PlayerPrefs.GetFloat("SoundsVolume");
+        MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
+        SoundsVolume = PlayerPrefs.GetFloat("SoundsVolume", 1);
         ResWidth = PlayerPrefs.GetInt("width");
         ResHeight = PlayerPrefs.GetInt("height");
     }
@@ -96,6 +98,10 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void OnApplicationQuit()
     {
+#if !UNITY_EDITOR
+        SteamClient.Shutdown();
+#endif
+
         PlayerPrefs.SetFloat("MusicVolume", MusicVolume);
         PlayerPrefs.SetFloat("SoundsVolume", SoundsVolume);
         PlayerPrefs.Save();

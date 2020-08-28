@@ -17,6 +17,13 @@ public class DifficultyPanel : Panel
     [SerializeField]
     private float delayBetweenLetters = 0.05f;
 
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     protected override void OnShow()
     {
         Cursor.visible = true;
@@ -40,6 +47,8 @@ public class DifficultyPanel : Panel
         for (int i = 0; i < messageText.Length; i++)
         {
             message.text += messageText[i];
+            audioSource.Play();
+
             yield return new WaitForSecondsRealtime(delayBetweenLetters);
         }
 

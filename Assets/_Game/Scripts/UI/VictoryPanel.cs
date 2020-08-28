@@ -2,9 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+using Steamworks;
+using Steamworks.Data;
 
 public class VictoryPanel : Panel
 {
@@ -12,7 +16,18 @@ public class VictoryPanel : Panel
     private TMP_Text timeText;
 
     [SerializeField]
-    private GameObject backButton; 
+    private GameObject backButton;
+
+    [SerializeField]
+    private Transform leaderboardContent;
+
+    [SerializeField]
+    private LeaderboardCell leaderboardCell;
+
+    [SerializeField]
+    private UnityEngine.Color[] bgColors;
+
+    private float completeTime;
 
     public override void Initialise()
     {
@@ -25,6 +40,35 @@ public class VictoryPanel : Panel
             CompleteTrigger.Instance.OnComplete -= ShowPanel;
     }
 
+    private void Start()
+    {
+        completeTime = SaveManager.Instance.GetTimePlayed() + MovementController.Instance.TimePlayed;
+        LoadLeaderboard();
+    }
+
+    private async void LoadLeaderboard()
+    {
+        if (!SteamClient.IsLoggedOn)
+            return;
+
+        Steamworks.Data.Leaderboard? leaderboard = await SteamUserStats.FindOrCreateLeaderboardAsync(SaveManager.Instance.CurrentMap, Steamworks.Data.LeaderboardSort.Ascending, Steamworks.Data.LeaderboardDisplay.Numeric);
+        if (leaderboard.HasValue)
+        {
+            int result = (int)completeTime * 100;
+            await leaderboard.Value.SubmitScoreAsync(result);
+
+            LeaderboardEntry[] entries = await leaderboard.Value.GetScoresAsync(10);
+            if (entries != null)
+            {
+                for (int i = 0; i < entries.Length; i++)
+                {
+                    LeaderboardCell cell = Instantiate(leaderboardCell, leaderboardContent);
+                    cell.Configure(i + 1, entries[i].User.Name, entries[i].Score, bgColors[i % 2 == 0 ? 0 : 1]);
+                }
+            }
+        }
+    }
+
     public void ShowTime()
     {
         StartCoroutine(ShowTimeIE());
@@ -32,8 +76,6 @@ public class VictoryPanel : Panel
 
     private IEnumerator ShowTimeIE()
     {
-        float completeTime = SaveManager.Instance.GetTimePlayed() + MovementController.Instance.TimePlayed;
-
         float increment = completeTime / 100;
         float counter = 0;
 
@@ -71,10 +113,10 @@ public class VictoryPanel : Panel
         backButton.SetActive(true);
     }
 
-    public void Back()
+    public void Continue()
     {
         SaveManager.Instance.ClearSavedData(SaveManager.Instance.CurrentMap);
-        SceneManager.LoadScene("MainMenu");
+        PanelManager.Instance.ShowPanel<LeaderboardPanel>();
     }
 
     private void OnApplicationQuit()

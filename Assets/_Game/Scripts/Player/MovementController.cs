@@ -71,8 +71,8 @@ public class MovementController : MonoBehaviour
             float leg1Vel = Mathf.Abs(LegPivot1.angularVelocity.z);
             float leg2Vel = Mathf.Abs(LegPivot2.angularVelocity.z);
 
-            if ((leg1Vel > 0.1f && leg1Vel < 0.6f && leg2Vel < 0.3f) ||
-                (leg2Vel > 0.1f && leg2Vel < 0.6f && leg1Vel < 0.3f))
+            if ((leg1Vel > 0.2f && leg1Vel < 1f && leg2Vel < 0.3f) ||
+                (leg2Vel > 0.2f && leg2Vel < 1f && leg1Vel < 0.3f))
                 expressionMetre = 0;
             else
                 expressionMetre = 0.5f;

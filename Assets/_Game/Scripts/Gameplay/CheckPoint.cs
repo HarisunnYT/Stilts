@@ -15,6 +15,9 @@ public class CheckPoint : MonoBehaviour
     [SerializeField]
     private GameObject triggeredParticle;
 
+    [SerializeField]
+    private SkyboxTrigger currentSkybox;
+
     private bool triggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +35,9 @@ public class CheckPoint : MonoBehaviour
                 triggeredParticle.SetActive(true);
                 GetComponent<AudioSource>().Play();
             }
+
+            if (currentSkybox)
+                currentSkybox.TriggerSkybox(0);
 
             Debug.Log("Checkpoint Triggered");
         }

@@ -15,7 +15,7 @@ public class SettingsPanel : Panel
     }
 
     [SerializeField]
-    private Resolution[] resolutions;
+    private List<Resolution> resolutions;
 
     [SerializeField]
     private TMP_Text resolutionText;
@@ -41,7 +41,20 @@ public class SettingsPanel : Panel
     protected override void OnShow()
     {
         Cursor.visible = true;
-        SetRes(PlayerPrefs.GetInt("width", 1280), PlayerPrefs.GetInt("height", 720));
+
+        Vector2 currentRes = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+        bool hasRes = false;
+
+        foreach(var res in resolutions)
+        {
+            if (res.Width == currentRes.x && res.Height == currentRes.y)
+                hasRes = true;
+        }
+
+        if (!hasRes)
+            resolutions.Add(new Resolution() { Width = (int)currentRes.x, Height = (int)currentRes.y });
+
+        SetRes(PlayerPrefs.GetInt("width", (int)currentRes.x), PlayerPrefs.GetInt("height", (int)currentRes.y));
     }
 
     protected override void OnClose()
@@ -53,8 +66,8 @@ public class SettingsPanel : Panel
     {
         resIndex += dir;
         if (resIndex < 0)
-            resIndex = resolutions.Length - 1;
-        else if (resIndex >= resolutions.Length)
+            resIndex = resolutions.Count - 1;
+        else if (resIndex >= resolutions.Count)
             resIndex = 0;
 
         SetRes(resIndex);
