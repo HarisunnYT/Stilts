@@ -32,9 +32,11 @@ public class LevelCell : MonoBehaviour
 
     private async void LoadPreviewImage(string url)
     {
-        Texture2D texture = await GetRemoteTexture(url);
-        if (texture != null && !string.IsNullOrEmpty(url))
+        if (!string.IsNullOrEmpty(url))
+        {
+            Texture2D texture = await GetRemoteTexture(url);
             previewImage.texture = texture;
+        }
     }
 
     private async Task<Texture2D> GetRemoteTexture(string url)

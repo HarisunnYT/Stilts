@@ -73,8 +73,8 @@ public class SettingsPanel : Panel
 
     private void SetRes(int index)
     {
-        SetRes();
         GameManager.Instance.SetRes(resolutions[index].Width, resolutions[index].Height, GameManager.Instance.ResFullscreen);
+        resolutionText.text = resolutions[index].Width + "x" + resolutions[index].Height;
     }
 
     private void SetRes()

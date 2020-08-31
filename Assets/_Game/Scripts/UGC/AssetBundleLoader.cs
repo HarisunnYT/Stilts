@@ -62,7 +62,7 @@ public class AssetBundleLoader : PersistentSingleton<AssetBundleLoader>
                     foreach (var file in directory.GetFiles())
                     {
                         //it means it could be an asset bundle file
-                        if (string.IsNullOrEmpty(file.Extension))
+                        if (string.IsNullOrEmpty(file.Extension) && !file.Name.Contains("Workshop"))
                         {
                             AssetBundleCreateRequest bundleLoadRequest = AssetBundle.LoadFromFileAsync(Path.Combine(item.Directory, file.Name));
                             yield return bundleLoadRequest;

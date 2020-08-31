@@ -57,7 +57,7 @@ public class VictoryPanel : Panel
             int result = (int)completeTime * 100;
             await leaderboard.Value.SubmitScoreAsync(result);
 
-            LeaderboardEntry[] entries = await leaderboard.Value.GetScoresAsync(10);
+            LeaderboardEntry[] entries = await leaderboard.Value.GetScoresAsync(5);
             if (entries != null)
             {
                 for (int i = 0; i < entries.Length; i++)

@@ -123,7 +123,7 @@ public class WorkshopUploaderWindow : EditorWindow
         string sportTag = "";
         string memeTag = "";
         string puzzleTag = "";
-        string sumulationTag = "";
+        string simulationTag = "";
 
         EditorGUILayout.BeginHorizontal();
         easyTag = (easyState = GUILayout.Toggle(easyState, "Easy")) ? "Easy" : "";
@@ -133,7 +133,7 @@ public class WorkshopUploaderWindow : EditorWindow
         sportTag = (sportState = GUILayout.Toggle(sportState, "Sport")) ? "Sport" : "";
         memeTag = (memeState = GUILayout.Toggle(memeState, "Meme")) ? "Meme" : "";
         puzzleTag = (puzzleState = GUILayout.Toggle(puzzleState, "Puzzle")) ? "Puzzle" : "";
-        sumulationTag = (simulationState = GUILayout.Toggle(simulationState, "Simulation")) ? "Simluation" : "";
+        simulationTag = (simulationState = GUILayout.Toggle(simulationState, "Simulation")) ? "Simluation" : "";
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space(100);
@@ -150,7 +150,7 @@ public class WorkshopUploaderWindow : EditorWindow
                 }
             }
 
-            WorkshopUploader.Upload(id, title, description, iconPath, easyTag, hardTag, hardcoreTag, arcadeTag);
+            WorkshopUploader.Upload(id, title, description, iconPath, easyTag, hardTag, hardcoreTag, arcadeTag, sportTag, memeTag, puzzleTag, simulationTag);
         }
 
         EditorGUILayout.BeginHorizontal();
