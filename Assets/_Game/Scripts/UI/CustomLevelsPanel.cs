@@ -1,5 +1,4 @@
-﻿using DanielLochner.Assets.SimpleScrollSnap;
-using Steamworks;
+﻿using Steamworks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,19 +9,15 @@ public class CustomLevelsPanel : Panel
     private GameObject player;
 
     [SerializeField]
-    private GameObject levelCellPrefab;
-
-    [SerializeField]
-    private GameObject togglePrefab;
-
-    [SerializeField]
-    private SimpleScrollSnap scroller;
+    private LevelCell levelCellPrefab;
 
     [SerializeField]
     private Transform levelCellContent;
 
     [SerializeField]
     private GameObject message;
+
+    private List<LevelCell> panels = new List<LevelCell>();
 
     protected override void OnShow()
     {
@@ -31,9 +26,9 @@ public class CustomLevelsPanel : Panel
         foreach (var workshopItem in AssetBundleLoader.Instance.LoadedWorkshopItems)
         {
             bool exists = false;
-            for (int i = 0; i < scroller.Panels.Count; i++)
+            for (int i = 0; i < panels.Count; i++)
             {
-                if (scroller.Panels[i].GetComponent<LevelCell>().LevelName == workshopItem.LevelName)
+                if (panels[i].GetComponent<LevelCell>().LevelName == workshopItem.LevelName)
                     exists = true;
             }
 
@@ -41,20 +36,20 @@ public class CustomLevelsPanel : Panel
                 CreateLevelCell(workshopItem);
         }
 
-        for (int i = 0; i < scroller.Panels.Count; i++)
+        for (int i = 0; i < panels.Count; i++)
         {
             bool needsDeleting = true;
             foreach (var workshopItem in AssetBundleLoader.Instance.LoadedWorkshopItems)
             {
-                if (scroller.Panels[i].GetComponent<LevelCell>().LevelName == workshopItem.LevelName)
+                if (panels[i].GetComponent<LevelCell>().LevelName == workshopItem.LevelName)
                     needsDeleting = false;
             }
 
             if (needsDeleting)
-                scroller.Remove(i);
+                panels.RemoveAt(i);
         }
 
-        message.SetActive(scroller.Panels.Count == 0);
+        message.SetActive(panels.Count == 0);
     }
 
     public void Refresh()
@@ -64,11 +59,10 @@ public class CustomLevelsPanel : Panel
 
     private void CreateLevelCell(AssetBundleLoader.WorkshopItem workshopItem)
     {
-        Instantiate(togglePrefab, scroller.pagination.transform.position + new Vector3(10 * (scroller.NumberOfPanels + 1), 0, 0), Quaternion.identity, scroller.pagination.transform);
-        scroller.pagination.transform.position -= new Vector3(10 / 2f, 0, 0);
+        LevelCell levelCell = Instantiate(levelCellPrefab, levelCellContent);
+        levelCell.Configure(workshopItem);
 
-        GameObject obj = scroller.Add(levelCellPrefab, 0);
-        obj.GetComponent<LevelCell>().Configure(workshopItem);
+        panels.Add(levelCell);
     }
 
     public void OpenWorkshop()

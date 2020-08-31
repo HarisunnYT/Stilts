@@ -9,10 +9,7 @@ using UnityEngine.UI;
 public class LevelCell : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text levelNameText;
-
-    [SerializeField]
-    private TMP_Text ownerNameText;
+    private TMP_Text mapAndAuthorNameText;
 
     [SerializeField]
     private RawImage previewImage;
@@ -25,8 +22,7 @@ public class LevelCell : MonoBehaviour
 
     public void Configure(AssetBundleLoader.WorkshopItem workshopItem)
     {
-        levelNameText.text = workshopItem.LevelName;
-        ownerNameText.text = workshopItem.Item.Owner.Name;
+        mapAndAuthorNameText.text = string.Format("{0} <size=36><color=#262626>by</size></color> {1}", workshopItem.LevelName, workshopItem.Item.Owner.Name);
         LoadPreviewImage(workshopItem.Item.PreviewImageUrl);
 
         LevelName = workshopItem.LevelName;

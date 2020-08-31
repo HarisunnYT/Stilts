@@ -22,7 +22,11 @@ public class GameManager : PersistentSingleton<GameManager>
 
     protected override void Initialize()
     {
-        SteamClient.Init(1394510);
+        try
+        {
+            SteamClient.Init(1394510);
+        }
+        catch (System.Exception e) { }
 
         SceneManager.activeSceneChanged += ActiveSceneChanged;
 
@@ -44,16 +48,20 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private async void TriggerStartUpAchievements()
     {
-        if (SteamClient.Name == "Emurinoo")
-            AchievementManager.CompleteAchievement("one_of_us");
-
-        var query = Query.All.WhereUserPublished(SteamClient.SteamId);
-        var task = await query.GetPageAsync(1);
-        foreach(var entry in task.Value.Entries)
+        try
         {
-            if (entry.VotesUp > 50)
-                AchievementManager.CompleteAchievement("receive_50_upvotes");
+            if (SteamClient.Name == "Emurinoo")
+                AchievementManager.CompleteAchievement("one_of_us");
+
+            var query = Query.All.WhereUserPublished(SteamClient.SteamId);
+            var task = await query.GetPageAsync(1);
+            foreach (var entry in task.Value.Entries)
+            {
+                if (entry.VotesUp > 50)
+                    AchievementManager.CompleteAchievement("receive_50_upvotes");
+            }
         }
+        catch (System.Exception e) { }
     }
 
     private void ActiveSceneChanged(Scene from, Scene to)
@@ -88,12 +96,6 @@ public class GameManager : PersistentSingleton<GameManager>
         ResFullscreen = fullscreen;
 
         Screen.SetResolution(width, height, fullscreen);
-
-        PlayerPrefs.SetInt("windowed", fullscreen ? 0 : 1);
-        PlayerPrefs.SetInt("width", width);
-        PlayerPrefs.SetInt("height", height);
-
-        PlayerPrefs.Save();
     }
 
     private void OnApplicationQuit()

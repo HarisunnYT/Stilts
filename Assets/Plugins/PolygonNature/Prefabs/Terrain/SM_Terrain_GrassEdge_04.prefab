@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4383812186393936}
   - component: {fileID: 33482097910802922}
   - component: {fileID: 23104208134142040}
-  - component: {fileID: 5481451342576201629}
   m_Layer: 10
   m_Name: SM_Terrain_GrassEdge_04
   m_TagString: Grass
@@ -28,8 +27,16 @@ Transform:
   m_GameObject: {fileID: 1944111553845464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3.7686, z: 3}
-  m_Children: []
+  m_LocalScale: {x: 3.9618, y: 4.9768133, z: 3.9618}
+  m_Children:
+  - {fileID: 5604458548382452345}
+  - {fileID: 7563557923812909118}
+  - {fileID: 4926289317708279352}
+  - {fileID: 2123181536180036036}
+  - {fileID: 147455121958184268}
+  - {fileID: 712311291390259206}
+  - {fileID: 7534845980668506928}
+  - {fileID: 5162873446454483895}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,17 +87,355 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5481451342576201629
-MeshCollider:
+--- !u!1 &1556003589745113523
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1944111553845464}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 147455121958184268}
+  - component: {fileID: 2388256886524481418}
+  m_Layer: 10
+  m_Name: Collider (4)
+  m_TagString: Grass
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &147455121958184268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556003589745113523}
+  m_LocalRotation: {x: -0, y: -0, z: -0.23637351, w: 0.97166234}
+  m_LocalPosition: {x: 1.1, y: 1.762, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 5.04}
+  m_Children: []
+  m_Father: {fileID: 4383812186393936}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -27.345001}
+--- !u!65 &2388256886524481418
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556003589745113523}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.46276733, y: 0.24905108, z: 1}
+  m_Center: {x: -0.0104617085, y: 0.0003525601, z: 0}
+--- !u!1 &1877471772599016856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7534845980668506928}
+  - component: {fileID: 7608636849948374224}
+  m_Layer: 10
+  m_Name: Collider (6)
+  m_TagString: Grass
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7534845980668506928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877471772599016856}
+  m_LocalRotation: {x: -0, y: -0, z: 0.16374332, w: 0.98650306}
+  m_LocalPosition: {x: -1.704, y: 1.624, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 5.04}
+  m_Children: []
+  m_Father: {fileID: 4383812186393936}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18.848001}
+--- !u!65 &7608636849948374224
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877471772599016856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.44438824, y: 0.2490511, z: 1}
+  m_Center: {x: -0.0006885281, y: 0.0023630087, z: 0}
+--- !u!1 &2774423755992442332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5162873446454483895}
+  - component: {fileID: 560990204052060158}
+  m_Layer: 10
+  m_Name: Collider (7)
+  m_TagString: Grass
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5162873446454483895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2774423755992442332}
+  m_LocalRotation: {x: -0, y: -0, z: -0.23637351, w: 0.97166234}
+  m_LocalPosition: {x: 1.518, y: 1.64, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 5.04}
+  m_Children: []
+  m_Father: {fileID: 4383812186393936}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -27.345001}
+--- !u!65 &560990204052060158
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2774423755992442332}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.46276733, y: 0.24905108, z: 1}
+  m_Center: {x: -0.0104617085, y: 0.0003525601, z: 0}
+--- !u!1 &2924893164728831118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5604458548382452345}
+  - component: {fileID: 3805490586143243949}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Grass
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5604458548382452345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924893164728831118}
+  m_LocalRotation: {x: -0, y: -0, z: 0.068722166, w: 0.99763584}
+  m_LocalPosition: {x: 0.036, y: 1.855, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 5.04}
+  m_Children: []
+  m_Father: {fileID: 4383812186393936}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.8810005}
+--- !u!65 &3805490586143243949
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924893164728831118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6309886, y: 0.2490511, z: 1}
+  m_Center: {x: -0.034475558, y: 0.002152268, z: 0}
+--- !u!1 &6373936288946158120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4926289317708279352}
+  - component: {fileID: 6119653763952085539}
+  m_Layer: 10
+  m_Name: Collider (2)
+  m_TagString: Grass
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4926289317708279352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373936288946158120}
+  m_LocalRotation: {x: -0, y: -0, z: 0.12817064, w: 0.99175215}
+  m_LocalPosition: {x: -0.783, y: 1.814, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 5.04}
+  m_Children: []
+  m_Father: {fileID: 4383812186393936}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 14.728001}
+--- !u!65 &6119653763952085539
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373936288946158120}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.56464624, y: 0.2490511, z: 1}
+  m_Center: {x: -0.06220425, y: 0.0094645545, z: 0}
+--- !u!1 &7084567670082671091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7563557923812909118}
+  - component: {fileID: 6902612237013021249}
+  m_Layer: 10
+  m_Name: Collider (1)
+  m_TagString: Grass
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7563557923812909118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7084567670082671091}
+  m_LocalRotation: {x: -0, y: -0, z: -0.004312774, w: 0.9999907}
+  m_LocalPosition: {x: -0.371, y: 1.835, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 5.04}
+  m_Children: []
+  m_Father: {fileID: 4383812186393936}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.49400002}
+--- !u!65 &6902612237013021249
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7084567670082671091}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.562111, y: 0.2490511, z: 1}
+  m_Center: {x: -0.00003564297, y: 0.0022876358, z: 0}
+--- !u!1 &7303479934803042995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2123181536180036036}
+  - component: {fileID: 1560657677992381599}
+  m_Layer: 10
+  m_Name: Collider (3)
+  m_TagString: Grass
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2123181536180036036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7303479934803042995}
+  m_LocalRotation: {x: -0, y: -0, z: -0.082375504, w: 0.9966014}
+  m_LocalPosition: {x: 0.555, y: 1.839, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 5.04}
+  m_Children: []
+  m_Father: {fileID: 4383812186393936}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.450001}
+--- !u!65 &1560657677992381599
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7303479934803042995}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7289764, y: 0.24905111, z: 1}
+  m_Center: {x: -0.003608788, y: 0.0044587213, z: 0}
+--- !u!1 &8089673146433817678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712311291390259206}
+  - component: {fileID: 2778807707602657347}
+  m_Layer: 10
+  m_Name: Collider (5)
+  m_TagString: Grass
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &712311291390259206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8089673146433817678}
+  m_LocalRotation: {x: -0, y: -0, z: 0.23696493, w: 0.9715182}
+  m_LocalPosition: {x: -1.282, y: 1.728, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 5.04}
+  m_Children: []
+  m_Father: {fileID: 4383812186393936}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.415}
+--- !u!65 &2778807707602657347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8089673146433817678}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.44438824, y: 0.2490511, z: 1}
+  m_Center: {x: -0.0006885281, y: 0.0023630087, z: 0}

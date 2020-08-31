@@ -35,14 +35,14 @@ public class SettingsPanel : Panel
     {
         musicSlider.value = GameManager.Instance.MusicVolume;
         soundsSlider.value = GameManager.Instance.SoundsVolume;
-        windowedToggle.isOn = PlayerPrefs.GetInt("windowed") == 1 ? true : false;
+        SetRes();
     }
 
     protected override void OnShow()
     {
         Cursor.visible = true;
 
-        Vector2 currentRes = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+        Vector2 currentRes = new Vector2(Screen.width, Screen.height);
         bool hasRes = false;
 
         foreach(var res in resolutions)
@@ -53,8 +53,6 @@ public class SettingsPanel : Panel
 
         if (!hasRes)
             resolutions.Add(new Resolution() { Width = (int)currentRes.x, Height = (int)currentRes.y });
-
-        SetRes(PlayerPrefs.GetInt("width", (int)currentRes.x), PlayerPrefs.GetInt("height", (int)currentRes.y));
     }
 
     protected override void OnClose()
@@ -75,13 +73,14 @@ public class SettingsPanel : Panel
 
     private void SetRes(int index)
     {
-        SetRes(resolutions[index].Width, resolutions[index].Height);
+        SetRes();
         GameManager.Instance.SetRes(resolutions[index].Width, resolutions[index].Height, GameManager.Instance.ResFullscreen);
     }
 
-    private void SetRes(int width, int height)
+    private void SetRes()
     {
-        resolutionText.text = width + "x" + height;
+        resolutionText.text = Screen.width + "x" + Screen.height;
+        windowedToggle.isOn = !Screen.fullScreen;
     }
 
     public void SetWindowed(bool value)
