@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class LevelCell : MonoBehaviour
 {
+    #if !UNITY_ANDROID && !UNITY_IOS
     [SerializeField]
     private TMP_Text mapAndAuthorNameText;
 
@@ -85,4 +86,5 @@ public class LevelCell : MonoBehaviour
         SaveManager.Instance.ClearSavedData(LevelName + "_" + ownerId);
         SceneManager.LoadScene(LevelName);
     }
+#endif
 }

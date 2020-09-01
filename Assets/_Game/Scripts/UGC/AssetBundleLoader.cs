@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class AssetBundleLoader : PersistentSingleton<AssetBundleLoader>
 {
+#if !UNITY_ANDROID && !UNITY_IOS
     public struct WorkshopItem
     {
         public Item Item;
@@ -93,4 +94,5 @@ public class AssetBundleLoader : PersistentSingleton<AssetBundleLoader>
 
         PanelManager.Instance.ShowPanel<CustomLevelsPanel>();
     }
+#endif
 }

@@ -26,7 +26,12 @@ public class Instructions : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_ANDROID || UNITY_IOS
+        leg1.gameObject.SetActive(false);
+        leg2.gameObject.SetActive(false);
+#else
         Invoke("ShowLeg1", firstInstructionsDelay);
+#endif
     }
 
     private void Update()

@@ -55,6 +55,7 @@ public class SaveManager : PersistentSingleton<SaveManager>
 
     public void CommunityLevelPlayed(string mapName)
     {
+#if !UNITY_ANDROID && !UNITY_IOS
         if (!PlayerPrefs.HasKey(mapName + "_played"))
         {
             PlayerPrefs.SetString(mapName + "_played", "true");
@@ -66,5 +67,6 @@ public class SaveManager : PersistentSingleton<SaveManager>
             if (mapName.Contains(SteamClient.SteamId.Value.ToString()))
                 AchievementManager.CompleteAchievement("play_own_level");
         }
+#endif
     }
 }

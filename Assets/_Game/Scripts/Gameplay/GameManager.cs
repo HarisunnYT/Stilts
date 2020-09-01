@@ -22,15 +22,17 @@ public class GameManager : PersistentSingleton<GameManager>
 
     protected override void Initialize()
     {
+#if !UNITY_ANDROID && !UNITY_IOS
         try
         {
             SteamClient.Init(1394510);
         }
         catch (System.Exception e) { }
+#endif
 
         SceneManager.activeSceneChanged += ActiveSceneChanged;
 
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && !UNITY_ANDROID && !UNITY_IOS
         Invoke("TriggerStartUpAchievements", 2);
 #endif
 
@@ -46,6 +48,7 @@ public class GameManager : PersistentSingleton<GameManager>
         SetSoundVolume(SoundsVolume);
     }
 
+    #if !UNITY_ANDROID && !UNITY_IOS
     private async void TriggerStartUpAchievements()
     {
         try
@@ -63,12 +66,20 @@ public class GameManager : PersistentSingleton<GameManager>
         }
         catch (System.Exception e) { }
     }
+#endif
 
     private void ActiveSceneChanged(Scene from, Scene to)
     {
         Time.timeScale = 1;
         if (to.name != "MainMenu")
+        {
             Instantiate(gameCanvasPrefab);
+#if UNITY_ANDROID || UNITY_IOS
+            PanelManager.Instance.ShowPanel<MobileHUDPanel>();
+#endif
+
+            FindObjectOfType<BackgroundMusic>().AssignMixer(audioMixer.FindMatchingGroups("Music")[0]);
+        }
     }
 
     private void Update()
@@ -100,7 +111,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void OnApplicationQuit()
     {
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && !UNITY_ANDROID && !UNITY_IOS
         SteamClient.Shutdown();
 #endif
 

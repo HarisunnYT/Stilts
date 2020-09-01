@@ -29,6 +29,10 @@ public class SettingsPanel : Panel
     [SerializeField]
     private Slider soundsSlider;
 
+    [Space()]
+    [SerializeField]
+    private GameObject resParent;
+
     private int resIndex = 0;
 
     public override void Initialise()
@@ -36,6 +40,10 @@ public class SettingsPanel : Panel
         musicSlider.value = GameManager.Instance.MusicVolume;
         soundsSlider.value = GameManager.Instance.SoundsVolume;
         SetRes();
+
+#if UNITY_ANDROID || UNITY_IOS
+        resParent.SetActive(false);
+#endif
     }
 
     protected override void OnShow()

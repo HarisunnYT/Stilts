@@ -19,6 +19,7 @@ public class CustomLevelsPanel : Panel
 
     private List<LevelCell> panels = new List<LevelCell>();
 
+#if !UNITY_ANDROID && !UNITY_IOS
     protected override void OnShow()
     {
         player.SetActive(false);
@@ -69,4 +70,5 @@ public class CustomLevelsPanel : Panel
     {
         SteamFriends.OpenWebOverlay("https://steamcommunity.com/app/1394510/workshop/");
     }
+#endif
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public static class AchievementManager
 {
+#if !UNITY_ANDROID && !UNITY_IOS
     public static Achievement GetAchievement(string achievementName)
     {
         foreach(var achievement in SteamUserStats.Achievements)
@@ -16,9 +17,11 @@ public static class AchievementManager
 
         return default;
     }
+#endif
 
     public static void CompleteAchievement(string achievementName)
     {
+#if !UNITY_ANDROID && !UNITY_IOS
         try
         {
             foreach (var achievement in SteamUserStats.Achievements)
@@ -28,5 +31,6 @@ public static class AchievementManager
             }
         }
         catch (System.Exception e) { }
+#endif
     }
 }

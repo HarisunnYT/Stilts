@@ -51,6 +51,9 @@ public class MainMenuPanel : Panel
 
         Cursor.visible = true;
 
+#if UNITY_ANDROID || UNITY_IOS
+        customLevelsButton.gameObject.SetActive(false);
+#else
         try
         {
             bool b = SteamClient.IsLoggedOn;
@@ -59,6 +62,7 @@ public class MainMenuPanel : Panel
         {
             customLevelsButton.interactable = false;
         }
+#endif
 
         ExitedNewGameButton();
     }
@@ -116,7 +120,9 @@ public class MainMenuPanel : Panel
 
     public void CustomLevels()
     {
+#if !UNITY_ANDROID && !UNITY_IOS
         AssetBundleLoader.Instance.LoadBundles();
+#endif
     }
 
     public void ExitedNewGameButton()

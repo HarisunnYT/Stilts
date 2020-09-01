@@ -49,20 +49,9 @@ public class MovementController : MonoBehaviour
             return;
 
         if (Input.GetAxisRaw("Leg1") != 0)
-        {
-            if (Input.GetAxisRaw("Leg1") > 0)
-                LegPivot1.AddTorque(new Vector3(0, 0, -rotationSpeed * Time.deltaTime), ForceMode.Impulse);
-            if (Input.GetAxisRaw("Leg1") < 0)
-                LegPivot1.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
-        }
-
+            MoveLeftLeg((int)Input.GetAxisRaw("Leg1"));
         if (Input.GetAxisRaw("Leg2") != 0)
-        {
-            if (Input.GetAxisRaw("Leg2") > 0)
-                LegPivot2.AddTorque(new Vector3(0, 0, -rotationSpeed * Time.deltaTime), ForceMode.Impulse);
-            if (Input.GetAxisRaw("Leg2") < 0)
-                LegPivot2.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
-        }
+            MoveRightLeg((int)Input.GetAxisRaw("Leg2"));
 
         if (Body.velocity.magnitude > 25)
             expressionMetre = 1;
@@ -79,6 +68,23 @@ public class MovementController : MonoBehaviour
         }
 
         animator.SetFloat("Expression", expressionMetre);
+    }
+
+    public void MoveRightLeg(int direction)
+    {
+        if (direction > 0)
+            LegPivot2.AddTorque(new Vector3(0, 0, -rotationSpeed * Time.deltaTime), ForceMode.Impulse);
+        else
+            LegPivot2.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
+    }
+
+    public void MoveLeftLeg(int direction)
+    {
+        if (direction > 0)
+            LegPivot1.AddTorque(new Vector3(0, 0, -rotationSpeed * Time.deltaTime), ForceMode.Impulse);
+        else
+            LegPivot1.AddTorque(new Vector3(0, 0, rotationSpeed * Time.deltaTime), ForceMode.Impulse);
+
     }
 
     public void SetInputEnable(bool enabled)

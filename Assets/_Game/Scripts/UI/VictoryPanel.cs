@@ -43,9 +43,13 @@ public class VictoryPanel : Panel
     private void Start()
     {
         completeTime = SaveManager.Instance.GetTimePlayed() + MovementController.Instance.TimePlayed;
+
+#if !UNITY_ANDROID && !UNITY_IOS
         LoadLeaderboard();
+#endif
     }
 
+#if !UNITY_ANDROID && !UNITY_IOS
     private async void LoadLeaderboard()
     {
         if (!SteamClient.IsLoggedOn)
@@ -68,6 +72,7 @@ public class VictoryPanel : Panel
             }
         }
     }
+#endif
 
     public void ShowTime()
     {
