@@ -76,7 +76,7 @@ public class LevelCell : MonoBehaviour
     {
         SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerId);
         SaveManager.Instance.CommunityLevelPlayed(LevelName + "_" + ownerId);
-        SceneManager.LoadScene(LevelName);
+        GameManager.Instance.LoadScene(LevelName);
     }
 
     public void NewGame()
@@ -84,7 +84,7 @@ public class LevelCell : MonoBehaviour
         SaveManager.Instance.SetCurrentMap(LevelName + "_" + ownerId);
         SaveManager.Instance.CommunityLevelPlayed(LevelName + "_" + ownerId);
         SaveManager.Instance.ClearSavedData(LevelName + "_" + ownerId);
-        SceneManager.LoadScene(LevelName);
+        GameManager.Instance.LoadScene(LevelName);
     }
 #endif
 }

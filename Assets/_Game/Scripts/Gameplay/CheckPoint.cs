@@ -35,9 +35,8 @@ public class CheckPoint : MonoBehaviour
                 triggeredParticle.SetActive(true);
                 GetComponent<AudioSource>().Play();
             }
-
-            if (currentSkybox)
-                currentSkybox.TriggerSkybox(0);
+            else if (currentSkybox)
+                    currentSkybox.TriggerSkybox(0);
 
             Debug.Log("Checkpoint Triggered");
         }

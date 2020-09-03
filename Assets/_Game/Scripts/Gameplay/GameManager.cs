@@ -14,11 +14,16 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField]
     private AudioMixer audioMixer;
 
+    [SerializeField]
+    private Animator transitionAnimator;
+
     public float MusicVolume { get; private set; }
     public float SoundsVolume { get; private set; }
     public int ResWidth { get; private set; }
     public int ResHeight { get; private set; }
     public bool ResFullscreen { get; private set; }
+
+    private Coroutine loadingSceneCoroutine;
 
     protected override void Initialize()
     {
@@ -107,6 +112,26 @@ public class GameManager : PersistentSingleton<GameManager>
         ResFullscreen = fullscreen;
 
         Screen.SetResolution(width, height, fullscreen);
+    }
+
+    public void LoadScene(string scene)
+    {
+        if (loadingSceneCoroutine == null)
+            loadingSceneCoroutine = StartCoroutine(LoadSceneIE(scene));
+    }
+
+    private IEnumerator LoadSceneIE(string scene)
+    {
+        transitionAnimator.SetTrigger("Show");
+
+        yield return new WaitForSecondsRealtime(1.2f);
+
+        AsyncOperation loadingScene = SceneManager.LoadSceneAsync(scene);
+
+        yield return loadingScene;
+
+        transitionAnimator.SetTrigger("Hide");
+        loadingSceneCoroutine = null;
     }
 
     private void OnApplicationQuit()

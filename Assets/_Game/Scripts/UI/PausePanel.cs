@@ -44,7 +44,7 @@ public class PausePanel : Panel
     public void ActuallyQuit()
     {
         SaveManager.Instance.SaveTime(MovementController.Instance.TimePlayed);
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.LoadScene("MainMenu");
     }
 
     public void Back()

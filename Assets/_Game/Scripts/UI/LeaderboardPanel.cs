@@ -7,6 +7,6 @@ public class LeaderboardPanel : Panel
 {
     public void Back()
     {
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.LoadScene("MainMenu");
     }
 }

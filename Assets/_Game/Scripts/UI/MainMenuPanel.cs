@@ -95,7 +95,7 @@ public class MainMenuPanel : Panel
     public void Continue()
     {
         SaveManager.Instance.SetCurrentMap(SaveManager.CampaignMapName);
-        SceneManager.LoadScene("Game");
+        GameManager.Instance.LoadScene("Game");
     }
 
     public void NewGame()
@@ -109,7 +109,7 @@ public class MainMenuPanel : Panel
         {
             SaveManager.Instance.SetCurrentMap(SaveManager.CampaignMapName);
             SaveManager.Instance.ClearSavedData(SaveManager.CampaignMapName);
-            SceneManager.LoadScene("Game");
+            GameManager.Instance.LoadScene("Game");
         }
     }
 
