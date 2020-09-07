@@ -43,8 +43,13 @@ public class GameManager : PersistentSingleton<GameManager>
 
         MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
         SoundsVolume = PlayerPrefs.GetFloat("SoundsVolume", 1);
-        ResWidth = PlayerPrefs.GetInt("width");
-        ResHeight = PlayerPrefs.GetInt("height");
+        ResWidth = PlayerPrefs.GetInt("width", Screen.currentResolution.width);
+        ResHeight = PlayerPrefs.GetInt("height", Screen.currentResolution.height);
+
+        if (ResWidth == 0)
+            ResWidth = Screen.currentResolution.width;
+        if (ResHeight == 0)
+            ResHeight = Screen.currentResolution.height;
     }
 
     private void Start()
