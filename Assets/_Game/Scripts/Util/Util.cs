@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class Util 
 {
@@ -27,5 +29,12 @@ public static class Util
         str.Append("s");
 
         return str.ToString();
+    }
+
+    public static List<T> FindObjectsOfTypeAll<T>()
+    {
+        return SceneManager.GetActiveScene().GetRootGameObjects()
+            .SelectMany(g => g.GetComponentsInChildren<T>(true))
+            .ToList();
     }
 }

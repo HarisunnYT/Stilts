@@ -49,6 +49,9 @@ public class MainMenuPanel : Panel
         player.gameObject.SetActive(true);
         continueObj.SetActive(SaveManager.Instance.HasSavedData(SaveManager.CampaignMapName));
 
+        newGameText.text = "New Game";
+        clickedNewGame = false;
+
         Cursor.visible = true;
 
 #if UNITY_ANDROID || UNITY_IOS
@@ -127,9 +130,11 @@ public class MainMenuPanel : Panel
 
     public void ExitedNewGameButton()
     {
+#if !UNITY_ANDROID && !UNITY_IOS
         newGameText.text = "New Game";
         clickedNewGame = false;
         EventSystem.current.SetSelectedGameObject(null);
+#endif
     }
 
     public void SetExpression(float exp)
