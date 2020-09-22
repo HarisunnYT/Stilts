@@ -133,7 +133,7 @@ public class WorkshopUploaderWindow : EditorWindow
         sportTag = (sportState = GUILayout.Toggle(sportState, "Sport")) ? "Sport" : "";
         memeTag = (memeState = GUILayout.Toggle(memeState, "Meme")) ? "Meme" : "";
         puzzleTag = (puzzleState = GUILayout.Toggle(puzzleState, "Puzzle")) ? "Puzzle" : "";
-        simulationTag = (simulationState = GUILayout.Toggle(simulationState, "Simulation")) ? "Simluation" : "";
+        simulationTag = (simulationState = GUILayout.Toggle(simulationState, "Simulation")) ? "Simulation" : "";
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space(100);

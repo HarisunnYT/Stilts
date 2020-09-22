@@ -21,6 +21,8 @@ public class MovementController : MonoBehaviour
     public float TimePlayed { get { return Time.time - timeStarted; } }
     private float timeStarted;
 
+    private const float deadzone = 0.1f;
+
     public Rigidbody Body { get; private set; }
 
     private Animator animator;
@@ -48,10 +50,10 @@ public class MovementController : MonoBehaviour
         if (!InputEnabled)
             return;
 
-        if (Input.GetAxisRaw("Leg1") != 0)
-            MoveLeftLeg((int)Input.GetAxisRaw("Leg1"));
-        if (Input.GetAxisRaw("Leg2") != 0)
-            MoveRightLeg((int)Input.GetAxisRaw("Leg2"));
+        if (Mathf.Abs(Input.GetAxisRaw("Leg1")) > deadzone)
+            MoveLeftLeg(Input.GetAxisRaw("Leg1") > 0 ? 1 : 0);
+        if (Mathf.Abs(Input.GetAxisRaw("Leg2")) > deadzone)
+            MoveRightLeg(Input.GetAxisRaw("Leg2") > 0 ? 1 : 0);
 
         if (Body.velocity.magnitude > 25)
             expressionMetre = 1;

@@ -25,6 +25,12 @@ public class VictoryPanel : Panel
     private LeaderboardCell leaderboardCell;
 
     [SerializeField]
+    private LeaderboardCell playerCell;
+
+    [SerializeField]
+    private UnityEngine.Color playerCellColor;
+
+    [SerializeField]
     private UnityEngine.Color[] bgColors;
 
     private float completeTime;
@@ -58,9 +64,10 @@ public class VictoryPanel : Panel
         Steamworks.Data.Leaderboard? leaderboard = await SteamUserStats.FindOrCreateLeaderboardAsync(SaveManager.Instance.CurrentMap, Steamworks.Data.LeaderboardSort.Ascending, Steamworks.Data.LeaderboardDisplay.Numeric);
         if (leaderboard.HasValue)
         {
-            int result = (int)completeTime * 100;
+            int result = (int)(completeTime * 100);
             await leaderboard.Value.SubmitScoreAsync(result);
 
+            bool isInTopFive = false;
             LeaderboardEntry[] entries = await leaderboard.Value.GetScoresAsync(5);
             if (entries != null)
             {
@@ -68,8 +75,26 @@ public class VictoryPanel : Panel
                 {
                     LeaderboardCell cell = Instantiate(leaderboardCell, leaderboardContent);
                     cell.Configure(i + 1, entries[i].User.Name, entries[i].Score, bgColors[i % 2 == 0 ? 0 : 1]);
+
+                    if (entries[i].User.Id == SteamClient.SteamId)
+                        isInTopFive = true;
                 }
             }
+
+            if (!isInTopFive)
+            {
+                LeaderboardEntry[] playerEntry = await leaderboard.Value.GetScoresAroundUserAsync(1, 1);
+                foreach (var entry in playerEntry)
+                {
+                    if (entry.User.Id == SteamClient.SteamId)
+                    {
+                        playerCell.Configure(entry.GlobalRank, SteamClient.Name, entry.Score, playerCellColor);
+                        break;
+                    }
+                }
+            }
+            else
+                playerCell.gameObject.SetActive(false);
         }
     }
 #endif
