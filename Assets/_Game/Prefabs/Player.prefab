@@ -40,7 +40,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: -0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.26898256, y: -0.4999576, z: 0}
+  m_ConnectedAnchor: {x: -0.26898167, y: -0.49995795, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -114,7 +114,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: -0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.33285055, y: -0.49551725, z: 0}
+  m_ConnectedAnchor: {x: -0.3328494, y: -0.49551657, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -188,7 +188,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: -0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.21344662, y: -0.00000014616809, z: -0.3629301}
+  m_ConnectedAnchor: {x: -0.21344711, y: -0.00000086951184, z: -0.3629301}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -262,7 +262,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0.49999806, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.13621138, y: 0.775661, z: -0.000000014901161}
+  m_ConnectedAnchor: {x: 0.1362114, y: 0.77566147, z: -0.000000014901161}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -396,8 +396,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.2, z: 1.2}
-  m_Center: {x: 0, y: -0.1, z: 0}
+  m_Size: {x: 1.2898254, y: 1.1098328, z: 1.2}
+  m_Center: {x: 0.14491272, y: 0.022369385, z: 0}
 --- !u!82 &6494610243490424810
 AudioSource:
   m_ObjectHideFlags: 0
@@ -672,7 +672,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.22550204, y: -0.33529043, z: 0.40366504}
+  m_ConnectedAnchor: {x: 0.22550201, y: -0.3352909, z: 0.40366504}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7d9eb5ffdbe5042aa81ef9286ebd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.3
+  delay: 0.5
   soundDamper: 15
   pitchOffset: 0.15
   dataList: {fileID: 11400000, guid: 6c27ad40fa5c6d54f8f5287bfb690f94, type: 2}
@@ -825,7 +825,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.22550228, y: -0.33529043, z: -0.40366548}
+  m_ConnectedAnchor: {x: 0.22550201, y: -0.3352909, z: -0.40366548}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -1018,7 +1018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7d9eb5ffdbe5042aa81ef9286ebd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.3
+  delay: 0.5
   soundDamper: 15
   pitchOffset: 0.15
   dataList: {fileID: 11400000, guid: 6c27ad40fa5c6d54f8f5287bfb690f94, type: 2}

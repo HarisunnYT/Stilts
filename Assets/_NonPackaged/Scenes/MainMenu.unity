@@ -390,7 +390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Loading Bundles
+  m_text: Loading Maps
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68d49bab7cc04b44083a7efca11da33b, type: 2}
   m_sharedMaterial: {fileID: -6908622207891758314, guid: 68d49bab7cc04b44083a7efca11da33b,

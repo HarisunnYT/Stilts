@@ -89,6 +89,12 @@ public class GameManager : PersistentSingleton<GameManager>
 #endif
 
             FindObjectOfType<BackgroundMusic>().AssignMixer(audioMixer.FindMatchingGroups("Music")[0]);
+
+            foreach (var character in FindObjectsOfType<MovementController>())
+                character.GetComponent<AudioSource>().outputAudioMixerGroup = audioMixer.FindMatchingGroups("Sounds")[0];
+
+            foreach (var leg in FindObjectsOfType<Leg>())
+                leg.AssignMixer(audioMixer.FindMatchingGroups("Sounds")[0]);
         }
     }
 

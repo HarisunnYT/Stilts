@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Leg : MonoBehaviour
 {
@@ -85,5 +86,11 @@ public class Leg : MonoBehaviour
         particle.transform.position = new Vector3(point.x, point.y, -50);
         ParticleSystem.MainModule main = particle.GetComponent<ParticleSystem>().main;
         main.maxParticles = (int)(collision.relativeVelocity.magnitude / 2);
+    }
+
+    public void AssignMixer(AudioMixerGroup mixer)
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = mixer;
     }
 }
